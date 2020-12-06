@@ -1,8 +1,53 @@
 *{
-  font-family:sans-serif;  
+  font-family: Arial, sans-serif;  
 }
 
-/*centered image in a div*/
+/* Navbar */
+.navbar-flex{
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 1rem;
+  background-color: #4b2e83;
+}
+
+.navbar-list{
+  display: inline;
+  margin: 0px 2rem;
+}
+.navbar-child-a{
+  display: flex;
+  align-items: center;
+  border: 1px black solid;
+}
+
+.navbar-child-b{
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  border: 1px black solid;  
+}
+
+.list-unstyled{
+  display: flex;
+  align-items: center;
+}
+
+.navbar-child-c{
+  display: flex;
+  align-items: center;
+  border: 1px black solid;
+}
+
+.navbar-navlink{
+  color: white;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+
+
+/* centered image in a div */
 .image-div{
   padding: 10px 0px;
   display: flex;
