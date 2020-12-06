@@ -1,6 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {Card, CardText, CardBody,CardLink, CardTitle, CardSubtitle, Col, Row} from 'reactstrap';
+import {NavBar} from './Navigation.js';
+import {Card, CardText, CardBody,CardLink, CardTitle, Col, Row} from 'reactstrap';
+import {Formik, setNestedObjectValues} from 'formik';
 
 export function EventsList(props){
   let events = props.events;
@@ -34,6 +35,52 @@ export function EventCard(props) {
       </Card>
 
     </Col>
+  )
+}
+
+export function EventSubmission(props){
+  
+  return(
+    <div>
+      
+      <main>
+        <h1>Submit an event</h1>
+       <Formik  initialValues={{title: '', hostedBy: '', date: '', location: '', description: '', image: '',}} 
+       
+       >
+        {({
+
+            values,
+            errors,
+            touched,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            isSubmitting,
+            /* and other goodies */
+
+          }) => (
+          <form onSubmit={handleSubmit}>
+            <input 
+              type="title"
+              name="title"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={setNestedObjectValues.title}
+            />
+            <button type="submit" >
+              Submit
+            </button>
+            
+          </form>
+       )}
+    
+       </Formik>
+      </main>
+
+    </div>
+ 
+    
   )
 }
 

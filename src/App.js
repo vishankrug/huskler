@@ -2,8 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './App.css';
 import {NavBar} from './Navigation.js'
-import {EventsList, EventCard} from './Events.js'
+import {EventsList, EventSubmission} from './Events.js'
 import {Container, Row, Col} from 'reactstrap'
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 
 
@@ -12,12 +13,20 @@ function App(props) {
   return (
     <div>
       <nav>
-       <NavBar></NavBar>
+       <NavBar />
+       
       </nav>
 
       <main>
         <div className="container">
-          <EventsList events={events}></EventsList>
+        <Switch>
+         <Route exact path="/" render={(routerProps) => (
+          <EventsList {...routerProps} events={events}></EventsList>
+         )} />
+         <Route path="/submit-events" component={EventSubmission} />
+         <Redirect to="/" />
+       </Switch>
+          
         </div>
       </main>
 
