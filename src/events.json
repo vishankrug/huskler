@@ -1,0 +1,31 @@
+[
+  {
+    "title": "Audio Editing Workshop",
+    "hostedBy": "Undergraduate Theater Society",
+    "description": "The show must go on! If we can’t bring an audience to us, we’ll package and deliver it to them in the comfort of their own home. A top to bottom walkthrough of our production timeline with a focus on audio recording, editing, and mixing and mastering. Stick around to the end to hear about how to get involved with theatre right now!",
+    "image": "audioworkshop.png",
+    "date": "Friday, November 13",
+    "time": "6 PM PST",
+    "locationName": "Online",
+    "locationLink": "https://washington.zoom.us/j/92496844546"
+    }, {
+    "title": "LUX Guest Speaker Video Workshop",
+    "hostedBy": "LUX",
+    "description": "John Smith, a videographer for the TARDIS, is gladly joining us to teach students about the craft of videography. The software used for this workshow is called the 'Sonic Screwdriver' and is available free. Please download the software if you would like to follow along",
+    "image": "lux.png",
+    "date": "Monday, November 16",
+    "time": "6 PM PST",
+    "locationName": "Online",
+    "locationLink": "https://washington.zoom.us/j/92496844546"
+  }, {
+    "title": "Open Mic",
+    "hostedBy": "Songwriter Circle",
+    "description": "The second ever open mic will be hosted through Zoom in accordnace to the UW Covid-19 policy. We have 5 performers signed up for the night, but we highly welcome (and encourage) audience member to take the mic and share with us their songs.",
+    "image": "song-writer.png",
+    "date": "Wednesday, November 18",
+    "time": "7 PM PST",
+    "locationName": "Online",
+    "locationLink": "https://washington.zoom.us/j/92496844546"
+
+  }
+]

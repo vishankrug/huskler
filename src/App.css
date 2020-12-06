@@ -1,0 +1,19 @@
+*{
+  font-family:sans-serif;  
+}
+
+/*centered image in a div*/
+.image-div{
+  padding: 10px 0px;
+  display: flex;
+  justify-content: center;
+}
+
+.event-images{
+  max-height: 200px;
+  
+}
+
+.clickable{
+  cursor: pointer;
+}

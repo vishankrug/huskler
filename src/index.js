@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+
+import App from './App.js';
 import {BrowserRouter} from 'react-router-dom'
+import SAMPLE_EVENTS from './events.json'
 
 
 ReactDOM.render(
   <BrowserRouter>
-    <App />
+    <App events={SAMPLE_EVENTS}/>
   </BrowserRouter>,
   document.getElementById('root')
 );
