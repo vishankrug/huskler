@@ -14,6 +14,8 @@
   display: inline;
   margin: 0px 2rem;
 }
+
+
 .navbar-child-a{
   display: flex;
   align-items: center;
@@ -42,9 +44,12 @@
 .navbar-navlink{
   color: white;
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 
+.icons{
+  font-size: 1.8rem;
+}
 
 
 /* centered image in a div */

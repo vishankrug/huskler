@@ -18,15 +18,15 @@ export function NavBar(){
       <div className="navbar-child-b mx-2">
         <ul className="list-unstyled">
           <li className="navbar-list">
-            <NavLink exact to="/" className="navbar-navlink">{homeIcon}</NavLink>
+            <NavLink exact to="/" className="navbar-navlink icons">{homeIcon}</NavLink>
           </li>
           <li className="navbar-list">
-            <NavLink exact to="/people" className="navbar-navlink">{peopleIcon}</NavLink>
+            <NavLink exact to="/people" className="navbar-navlink icons">{peopleIcon}</NavLink>
           </li>
         </ul> 
       </div>
       <div className="navbar-child-c mx-2">
-      <NavLink className="navbar-navlink" exact to="/">USER PROFILE</NavLink>
+      <NavLink className="navbar-navlink" exact to="/">LOG IN</NavLink>
       </div>
     </div>
 
