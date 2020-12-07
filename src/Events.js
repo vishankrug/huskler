@@ -6,7 +6,7 @@ import {Formik, setNestedObjectValues} from 'formik';
 export function EventsList(props){
   let events = props.events;
   let eventCards = events.map((event) => {
-    return <EventCard key ={events.title} event={event} />
+    return <EventCard key= {event.title} event={event} />
   })
    
   return(
@@ -22,7 +22,7 @@ export function EventCard(props) {
 
   return (
     <Col md="6" className="mt-4">
-      <Card tag="a" className="clickable">
+      <Card className="clickable">
         <div className="image-div">
           <img className="event-images" src={"images/" + event.image} alt={"an image for " + event.title} />
         </div>

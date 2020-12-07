@@ -1,12 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {Card, CardText, CardBody,CardLink, CardTitle, CardSubtitle, Col, Row} from 'reactstrap';
+import {Card, CardText, CardBody,CardLink, CardTitle, Col, Row} from 'reactstrap';
 
 
 export function PeopleList(props){
     let peoples = props.people;
     let peopleCards = peoples.map((individual) => {
-    return <PeopleCard key ={peoples.email} people={individual} />
+    return <PeopleCard key={individual.email} people={individual} />
   })
    
   return(
@@ -23,7 +22,7 @@ export function PeopleCard(props) {
 
     return (
       <Col  className="mt-4 col-sm-4">
-        <Card tag="a" className="clickable">
+        <Card className="clickable">
           <div className= "mx-auto">
             <img className="rounded-circle people_image" src={people.image}  alt={"an image for " + people.fname + people.lname}/>
           </div>
