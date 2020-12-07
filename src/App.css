@@ -82,7 +82,10 @@
   padding: 10px 1rem;
 }
 
-.submit{
-    display: flex;
-    justify-content: flex-end;
-  }
+.form{
+  text-align: center;
+}
+
+.form-child{
+  padding: .25rem;
+}
