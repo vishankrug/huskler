@@ -20,7 +20,7 @@
 .navbar-child-a{
   display: flex;
   align-items: center;
-  border: 1px black solid;
+
 }
 
 .navbar-child-b{
@@ -28,7 +28,6 @@
   flex: 1;
   justify-content: center;
   align-items: center;
-  border: 1px black solid; 
   padding-top: .8rem; 
 }
 
@@ -40,7 +39,7 @@
 .navbar-child-c{
   display: flex;
   align-items: center;
-  border: 1px black solid;
+
 }
 
 .navbar-navlink{
@@ -66,6 +65,23 @@
   
 }
 
+.event-images-lg{
+  max-width: 40%;
+  height: auto;
+  
+}
+
 .clickable{
   cursor: pointer;
+}
+
+.flex-nav-submission{
+  display: flex;
+  justify-content: right;
+  margin: 3rem 1.2rem 0rem 1.2rem;
+}
+
+.flex-nav-submission-back{
+  display: flex;
+  margin: 3rem 1.2rem 0rem 1.2rem;
 }

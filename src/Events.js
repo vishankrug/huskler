@@ -1,12 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
+import _ from 'lodash';
 import {NavBar} from './Navigation.js';
 import {Card, CardText, CardBody,CardLink, CardTitle, Col, Row} from 'reactstrap';
-import {Formik, setNestedObjectValues} from 'formik';
+import {useFormik, setNestedObjectValues} from 'formik';
+import {Redirect, useParams} from 'react-router-dom';
+import sample_events from './events.json';
 
 export function EventsList(props){
   let events = props.events;
   let eventCards = events.map((event) => {
-    return <EventCard key ={events.title} event={event} />
+    return <EventCard key={events.title} event={event} />
   })
    
   return(
@@ -20,9 +23,19 @@ export function EventsList(props){
 export function EventCard(props) {
   let event = props.event;
 
+  const[redirectTo, setRedirectTo] = useState(undefined);
+
+  const handleClick =() => {
+    setRedirectTo("/event/" + event.title);
+  }
+
+  if(redirectTo !== undefined){
+    return <Redirect push to={redirectTo}/>
+  }
+
   return (
     <Col md="6" className="mt-4">
-      <Card tag="a" className="clickable">
+      <Card tag="a" className="clickable" onClick={handleClick}>
         <div className="image-div">
           <img className="event-images" src={"images/" + event.image} alt={"an image for " + event.title} />
         </div>
@@ -38,44 +51,103 @@ export function EventCard(props) {
   )
 }
 
+export function EventPage(props){
+  let eventName = useParams().eventName;
+
+  let event = _.find(sample_events, {title:eventName});
+ 
+  if(!event){
+    return <h2>No event that matches</h2>
+  }
+
+  return(
+    <div>
+      <img src={"../images/" + event.image} alt={event.title} className="event-images-lg mt-5" />
+      <h2>{event.title}</h2>
+      <p><strong>Hosted by: </strong>{event.hostedBy}</p>
+      <p><strong>Date: </strong>{event.date}</p>
+      <p><strong>Time: </strong>{event.time}</p>
+      <p><strong>Location: </strong>{event.location}</p>
+      <p><strong>Link: </strong><a href={event.locationLink}>{event.locationLink}</a></p>
+    </div>
+  )
+}
+
 export function EventSubmission(props){
   
+  const  formik = useFormik({
+    initialValues: {
+      title: '', 
+      hostedBy: '', 
+      date: '', 
+      location: '', 
+      description: '', 
+      image: ''
+    }
+  });
   return(
     <div>
       
       <main>
-        <h1>Submit an event</h1>
-       <Formik  initialValues={{title: '', hostedBy: '', date: '', location: '', description: '', image: '',}} 
+        <h1 className="text-center">Submit an event</h1>
+
+        <form onSubmit={formik.handleSubmit}>
+          <label>Title of event</label> <br></br>
+          <input 
+                type="title"
+                name="title"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={setNestedObjectValues.title}
+          /> <br></br>
+
+          <label>Hosted By</label> <br></br>
+          <input 
+                type="title"
+                name="title"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={setNestedObjectValues.title}
+          /> <br></br>
+
+          <label>Date</label> <br></br>
+          <input 
+                type="title"
+                name="title"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={setNestedObjectValues.title}
+          /> <br></br>
+
+          <label>Location</label> <br></br>
+          <input 
+                type="title"
+                name="title"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={setNestedObjectValues.title}
+          /> <br></br>
+
+          <label>Description</label> <br></br>
+          <input 
+                type="title"
+                name="title"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={setNestedObjectValues.title}
+          /> <br></br>
+
+          <label>Image</label> <br></br>
+          <input 
+                type="title"
+                name="title"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={setNestedObjectValues.title}
+          /> <br></br>
+        </form>
        
-       >
-        {({
-
-            values,
-            errors,
-            touched,
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            isSubmitting,
-            /* and other goodies */
-
-          }) => (
-          <form onSubmit={handleSubmit}>
-            <input 
-              type="title"
-              name="title"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={setNestedObjectValues.title}
-            />
-            <button type="submit" >
-              Submit
-            </button>
-            
-          </form>
-       )}
-    
-       </Formik>
+      
       </main>
 
     </div>

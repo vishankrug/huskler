@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
-import { Switch, Route, Link, Redirect, NavLink } from 'react-router-dom';
+import { Switch, Route, Link, Redirect, NavLink, useLocation } from 'react-router-dom';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faHome, faUsers } from '@fortawesome/free-solid-svg-icons';
 
@@ -31,4 +31,41 @@ export function NavBar(){
     </div>
 
   )
+}
+
+export function Footer(){
+  return(
+    <div className="mt-5">
+      <hr></hr>
+      <p className="ml-5">Copyright &copy; 2020 Vishank Rughwani and Sam Quiambao. All rights reserved.  </p>
+    </div>
+  )
+}
+
+
+export function MainBar(props){
+
+  let location = useLocation().pathname;
+  console.log(location);
+  
+  
+  if(location === '/submit-events'){
+    return(
+      <div className="flex-nav-submission-back"><Link exact to="/" className="btn btn-primary">Go back</Link></div>
+    )
+  }else if(location === '/'){
+    return(
+      <div className="flex-nav-submission">
+        <div>
+          <Link to="/submit-events" className="btn btn-primary" >Submit Events</Link>
+        </div>
+      </div>
+
+    )
+    
+  }else{
+    return(
+      <p>You've messed up, buckaroo</p>
+    )
+  }
 }
