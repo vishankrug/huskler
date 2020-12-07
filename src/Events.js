@@ -7,9 +7,10 @@ import {Redirect, useParams} from 'react-router-dom';
 import sample_events from './events.json';
 
 export function EventsList(props){
+  let interestedCallback = props.interestedCallback;
   let events = props.events;
   let eventCards = events.map((event) => {
-    return <EventCard key={events.title} event={event} />
+    return <EventCard key={events.title} event={event} interestedCallback = {interestedCallback} />
   })
    
   return(
@@ -21,6 +22,7 @@ export function EventsList(props){
 }
 
 export function EventCard(props) {
+  let interestedCallback = props.interestedCallback;
   let event = props.event;
 
   const[redirectTo, setRedirectTo] = useState(undefined);
@@ -52,6 +54,7 @@ export function EventCard(props) {
 }
 
 export function EventPage(props){
+  let interestedCallback = props.interestedCallback;
   let eventName = useParams().eventName;
 
   let event = _.find(sample_events, {title:eventName});
@@ -59,6 +62,9 @@ export function EventPage(props){
   if(!event){
     return <h2>No event that matches</h2>
   }
+
+
+
 
   return(
     <div>
@@ -69,6 +75,8 @@ export function EventPage(props){
       <p><strong>Time: </strong>{event.time}</p>
       <p><strong>Location: </strong>{event.location}</p>
       <p><strong>Link: </strong><a href={event.locationLink}>{event.locationLink}</a></p>
+      <p><strong>Description:</strong> <br></br> {event.description}</p>
+      <button className="btn btn-primary">Interested!</button>
     </div>
   )
 }

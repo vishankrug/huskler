@@ -2,6 +2,7 @@
   font-family: Arial, sans-serif;  
 }
 
+
 /* Navbar */
 .navbar-flex{
   display: flex;
@@ -68,7 +69,12 @@
 .event-images-lg{
   max-width: 40%;
   height: auto;
+}
   
+.people_image{
+  max-height: 150px;
+  max-width: 150px;
+  padding-top: .5rem;
 }
 
 .clickable{
@@ -84,4 +90,16 @@
 .flex-nav-submission-back{
   display: flex;
   margin: 3rem 1.2rem 0rem 1.2rem;
+}
+.search-bar{
+  background-color:whitesmoke;
+  padding: 10px 1rem;
+}
+
+.form{
+  text-align: center;
+}
+
+.form-child{
+  padding: .25rem;
 }

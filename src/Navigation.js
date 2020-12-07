@@ -12,21 +12,21 @@ export function NavBar(){
     
     <div className="navbar-flex">
       <div className="navbar-child-a mx-2">
-        <NavLink className="navbar-navlink" exact to="/">UW FRIENDS</NavLink>
+        <NavLink className="navbar-navlink" exact to="/">huskler</NavLink>
       </div>
 
       <div className="navbar-child-b mx-2">
         <ul className="list-unstyled">
           <li className="navbar-list">
-            <NavLink exact to="/" className="navbar-navlink icons">{homeIcon}</NavLink>
+            <NavLink exact to="/" activeClassName="activeLink" className="navbar-navlink icons">{homeIcon}</NavLink>
           </li>
           <li className="navbar-list">
-            <NavLink exact to="/people" className="navbar-navlink icons">{peopleIcon}</NavLink>
+            <NavLink exact to="/people" activeClassName="activeLink" className="navbar-navlink icons">{peopleIcon}</NavLink>
           </li>
         </ul> 
       </div>
       <div className="navbar-child-c mx-2">
-      <NavLink className="navbar-navlink" exact to="/">LOG IN</NavLink>
+      <NavLink className="navbar-navlink" exact to="/">log in</NavLink>
       </div>
     </div>
 
