@@ -1,9 +1,13 @@
 import React from 'react';
 import {Card, CardText, CardBody,CardLink, CardTitle, Col, Row} from 'reactstrap';
+import { useState } from 'react';
+import { Redirect } from 'react-router-dom';
+
 
 
 export function PeopleList(props){
     let peoples = props.people;
+
     let peopleCards = peoples.map((individual) => {
     return <PeopleCard key={individual.email} people={individual} />
   })
@@ -17,11 +21,22 @@ export function PeopleList(props){
 }
 
 export function PeopleCard(props) {
-    let people = props.people;
   
+    const [redirectTo, setRedirectTo] = useState(undefined);
+
+    let people = props.people;
+
+    const handleClick = () => {
+      console.log("/people/"+props.people.fname);
+      setRedirectTo("/people/"+props.people.fname)
+    }
+
+    if(redirectTo !== undefined){
+      return <Redirect push to={redirectTo} />
+    }
 
     return (
-      <Col  className="mt-4 col-sm-4">
+      <Col  className="mt-4 col-sm-4" onClick={handleClick}>
         <Card className="clickable">
           <div className= "mx-auto">
             <img className="rounded-circle people_image" src={people.image}  alt={"an image for " + people.fname + people.lname}/>
@@ -32,10 +47,13 @@ export function PeopleCard(props) {
             <CardText className="card-info">{"Class Standing: " + people.year}</CardText>
             <CardText className="card-info">{"Interests: " + people.interests}</CardText>
             <CardText className="card-info">{"Email: " + people.email}</CardText>
-            <CardLink href="">Click to learn more!</CardLink>
+            <CardLink>Click to learn more!</CardLink>
           </CardBody>
         </Card>
   
       </Col>
     )
   }
+
+  
+

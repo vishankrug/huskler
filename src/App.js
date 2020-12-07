@@ -1,12 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './App.css';
 import {NavBar} from './Navigation.js'
-import {EventsList, EventCard, EventSubmission} from './Events.js'
+import {EventsList, EventSubmission} from './Events.js'
 import {PeopleList} from './people.js'
-import {Container, Row, Col} from 'reactstrap'
-import { Route, Switch, Link, Redirect, NavLink } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom'
 import { SearchBarPage, SearchBarEvent } from './search.js'
+import PeopleDetails from './PeopleDetails';
 
 
 
@@ -40,6 +39,7 @@ function App(props) {
          <Route path="/people" render={(routerProps) => (
            <PeopleList {...routerProps} people={people}></PeopleList>
          )} />
+         <Route path="/people/:people" component={ PeopleDetails }/>
          <Redirect to="/" />
        </Switch>
         

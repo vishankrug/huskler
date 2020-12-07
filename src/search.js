@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import { Switch, Route, Link, Redirect, NavLink } from 'react-router-dom';
 import { Button } from 'reactstrap';
 
 
