@@ -12,7 +12,7 @@ export function NavBar(){
     
     <div className="navbar-flex">
       <div className="navbar-child-a mx-2">
-        <NavLink className="navbar-navlink" exact to="/">UW FRIENDS</NavLink>
+        <NavLink className="navbar-navlink" exact to="/">huskler</NavLink>
       </div>
 
       <div className="navbar-child-b mx-2">
@@ -26,7 +26,7 @@ export function NavBar(){
         </ul> 
       </div>
       <div className="navbar-child-c mx-2">
-      <NavLink className="navbar-navlink" exact to="/">LOG IN</NavLink>
+      <NavLink className="navbar-navlink" exact to="/">log in</NavLink>
       </div>
     </div>
 

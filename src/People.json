@@ -1,0 +1,69 @@
+{
+  "results":[
+    {
+    "image": "images/avatar.png",
+    "fname": "Vishank",
+    "lname": "Rughwani",
+    "major": "Informatics",
+    "year": "Junior",
+    "interests": "Cycling",
+    "email": "vishankr@uw.edu"
+    }, {
+    "image": "../images/avatar.png",
+    "fname": "Sam",
+    "lname": "Quiambao",
+    "major": "Informatics",
+    "year": "Senior",
+    "interests": "Running",
+    "email": "samq@uw.edu"
+    },{
+    "image": "../images/avatar.png",
+    "fname": "Ramia",
+    "lname": "Shah",
+    "major": "CSE",
+    "year": "Senior",
+    "interests": "Exploring",
+    "email": "ramiasss@uw.edu"
+    },{
+    "image": "../images/avatar.png",
+    "fname": "Rayyan",
+    "lname": "Jha",
+    "major": "Business: Marketing",
+    "year": "Sophomore",
+    "interests": "Video Games",
+    "email": "rayyanjha@uw.edu"
+    },{
+    "image": "../images/avatar.png",
+    "fname": "Joshua",
+    "lname": "Dan",
+    "major": "Business",
+    "year": "Freshman",
+    "interests": "Food",
+    "email": "danjosh@uw.edu"
+    },{
+    "image": "../images/avatar.png",
+    "fname": "Renae",
+    "lname": "King",
+    "major": "CSE",
+    "year": "Freshman",
+    "interests": "Swimming",
+    "email": "rking@uw.edu"
+    },{
+    "image": "../images/avatar.png",
+    "fname": "Kathy",
+    "lname": "Wardh",
+    "major": "International Studies",
+    "year": "Senior",
+    "interests": "Running",
+    "email": "kathyw@uw.edu"
+    }, {
+    "image": "../images/avatar.png",
+    "fname": "Emily",
+    "lname": "Kimberly",
+    "major": "Communications",
+    "year": "Sophomore",
+    "interests": "Swimming",
+    "email": "emkim@uw.edu"
+    }
+  ] 
+}

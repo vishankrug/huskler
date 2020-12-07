@@ -4,11 +4,12 @@ import ReactDOM from 'react-dom';
 import App from './App.js';
 import {BrowserRouter} from 'react-router-dom'
 import SAMPLE_EVENTS from './events.json'
+import SAMPLE_PEOPLE from './People.json'
 
 
 ReactDOM.render(
   <BrowserRouter>
-    <App events={SAMPLE_EVENTS}/>
+    <App events={SAMPLE_EVENTS} people={SAMPLE_PEOPLE}/>
   </BrowserRouter>,
   document.getElementById('root')
 );
