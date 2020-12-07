@@ -2,6 +2,7 @@
   font-family: Arial, sans-serif;  
 }
 
+
 /* Navbar */
 .navbar-flex{
   display: flex;
@@ -75,3 +76,13 @@
 .clickable{
   cursor: pointer;
 }
+
+.search-bar{
+  background-color:whitesmoke;
+  padding: 10px 1rem;
+}
+
+.submit{
+    display: flex;
+    justify-content: flex-end;
+  }

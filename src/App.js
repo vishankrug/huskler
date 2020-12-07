@@ -6,6 +6,7 @@ import {EventsList, EventCard, EventSubmission} from './Events.js'
 import {PeopleList} from './people.js'
 import {Container, Row, Col} from 'reactstrap'
 import { Route, Switch, Link, Redirect, NavLink } from 'react-router-dom';
+import { SearchBarPage, SearchBarEvent } from './search.js'
 
 
 
@@ -20,9 +21,18 @@ function App(props) {
        
       </nav>
 
+
       <main>
         <div className="container">
-        <Switch>
+          <div className="search-bar">
+          <Route path="/people" render={() => (
+            <SearchBarPage></SearchBarPage>
+          )} />
+          <Route exact path="/" render={() => (
+            <SearchBarEvent></SearchBarEvent>
+          )} />
+          </div>
+          <Switch>
          <Route exact path="/" render={(routerProps) => (
           <EventsList {...routerProps} events={events}></EventsList>
          )} />
@@ -32,6 +42,7 @@ function App(props) {
          )} />
          <Redirect to="/" />
        </Switch>
+        
           
         </div>
       </main>
