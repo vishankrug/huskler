@@ -17,15 +17,19 @@ function App(props) {
   return (
     <div>
       <nav>
-       <NavBar></NavBar>
+       <NavBar />
+       
       </nav>
 
       <main>
         <div className="container">
-          <Switch>
-          <Route exact path="/" return = { eventPage }/>
-          <Route exact path="/people" return = { PeopleList }/>
-          </Switch>
+        <Switch>
+         <Route exact path="/" render={(routerProps) => (
+          <EventsList {...routerProps} events={events}></EventsList>
+         )} />
+         <Route path="/submit-events" component={EventSubmission} />
+         <Redirect to="/" />
+       </Switch>
           
         </div>
       </main>
