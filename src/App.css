@@ -66,6 +66,12 @@
   
 }
 
+.people_image{
+  max-height: 150px;
+  max-width: 150px;
+  padding-top: .5rem;
+}
+
 .clickable{
   cursor: pointer;
 }

@@ -2,10 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Card, CardText, CardBody,CardLink, CardTitle, CardSubtitle, Col, Row} from 'reactstrap';
 
+
 export function PeopleList(props){
-    let people = props.people;
-  let peopleCards = people.map((individual) => {
-    return <PeopleCard key ={people.lname} people={individual} />
+    let peoples = props.people;
+    let peopleCards = peoples.map((individual) => {
+    return <PeopleCard key ={peoples.email} people={individual} />
   })
    
   return(
@@ -19,18 +20,19 @@ export function PeopleList(props){
 export function PeopleCard(props) {
     let people = props.people;
   
+
     return (
-      <Col md="6" className="mt-4">
+      <Col  className="mt-4 col-sm-4">
         <Card tag="a" className="clickable">
-          <div className="image-div">
-            <img src={people.image} alt={"an image for " + people.fname + people.lname} />
+          <div className= "mx-auto">
+            <img className="rounded-circle people_image" src={people.image}  alt={"an image for " + people.fname + people.lname}/>
           </div>
-          <CardBody>
-            <CardTitle tag="h3" className="text-center">{people.fname + people.lname}</CardTitle>
-            <CardText className="text-center">{"Hosted by: " + people.major}</CardText>
-            <CardText className="text-center">{"Hosted by: " + people.year}</CardText>
-            <CardText className="text-center">{"Hosted by: " + people.interests}</CardText>
-            <CardText className="text-center">{"Hosted by: " + people.email}</CardText>
+          <CardBody className="card-body">
+            <CardTitle tag="h3" className="name text-center">{people.fname + " " + people.lname}</CardTitle>
+            <CardText className="card-info">{"Major: " + people.major}</CardText>
+            <CardText className="card-info">{"Class Standing: " + people.year}</CardText>
+            <CardText className="card-info">{"Interests: " + people.interests}</CardText>
+            <CardText className="card-info">{"Email: " + people.email}</CardText>
             <CardLink href="">Click to learn more!</CardLink>
           </CardBody>
         </Card>
