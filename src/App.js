@@ -5,17 +5,14 @@ import {NavBar, Footer, MainBar} from './Navigation.js'
 import {EventsList, EventSubmission, EventPage} from './Events.js'
 import {Container, Row, Col} from 'reactstrap'
 import { Route, Switch, Redirect, Link } from 'react-router-dom';
-import {PeopleList} from './People.js'
-import { SearchBarPage, SearchBarEvent } from './Search.js'
-import PeopleDetails from './PeopleDetails';
-
-
+import {PeopleList, PeopleDetails} from './People.js'
+import { SearchBarPage, SearchBarEvent } from './search.js'
 
 
 function App(props) {
 
   const events = props.events;
-  const people = props.people.results;
+  const people = props.people;
 
   const [interested, setInterested] = useState(events)
 
@@ -42,7 +39,7 @@ function App(props) {
 
         <div className="container">
           <div className="search-bar">
-          <Route path="/people" render={() => (
+          <Route exact path="/people" render={() => (
             <SearchBarPage></SearchBarPage>
           )} />
           <Route exact path="/" render={() => (
@@ -50,17 +47,20 @@ function App(props) {
           )} />
           </div>
           <Switch>
+            
+          <Route exact path="/people" render={(routerProps) => (
+           <PeopleList {...routerProps} people={people}></PeopleList>
+          )} />
+
          <Route exact path="/" render={(routerProps) => (
           <EventsList {...routerProps} events={events} interestedCallback={handleClick}></EventsList>
          )} />
+         
+
          <Route path="/submit-events" component={EventSubmission} />
          <Route path="/event/:eventName" component={EventPage} />
-  
-         
-         <Route path="/people" render={(routerProps) => (
-           <PeopleList {...routerProps} people={people}></PeopleList>
-         )} />
-         <Route path="/people/:people" component={ PeopleDetails }/>
+
+         <Route path="/people/:fullname" component={PeopleDetails}/>
          <Redirect to="/" />
        </Switch>
         

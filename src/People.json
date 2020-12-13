@@ -1,5 +1,4 @@
-{
-  "results":[
+[
     {
     "image": "images/avatar.png",
     "fname": "Vishank",
@@ -7,7 +6,8 @@
     "major": "Informatics",
     "year": "Junior",
     "interests": "Cycling",
-    "email": "vishankr@uw.edu"
+    "email": "vishankr@uw.edu",
+    "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
     }, {
     "image": "../images/avatar.png",
     "fname": "Sam",
@@ -15,7 +15,8 @@
     "major": "Informatics",
     "year": "Senior",
     "interests": "Running",
-    "email": "samq@uw.edu"
+    "email": "samq@uw.edu",
+    "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
     },{
     "image": "../images/avatar.png",
     "fname": "Ramia",
@@ -23,7 +24,8 @@
     "major": "CSE",
     "year": "Senior",
     "interests": "Exploring",
-    "email": "ramiasss@uw.edu"
+    "email": "ramiasss@uw.edu",
+    "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
     },{
     "image": "../images/avatar.png",
     "fname": "Rayyan",
@@ -31,7 +33,8 @@
     "major": "Business: Marketing",
     "year": "Sophomore",
     "interests": "Video Games",
-    "email": "rayyanjha@uw.edu"
+    "email": "rayyanjha@uw.edu",
+    "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
     },{
     "image": "../images/avatar.png",
     "fname": "Joshua",
@@ -39,7 +42,8 @@
     "major": "Business",
     "year": "Freshman",
     "interests": "Food",
-    "email": "danjosh@uw.edu"
+    "email": "danjosh@uw.edu",
+    "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
     },{
     "image": "../images/avatar.png",
     "fname": "Renae",
@@ -47,7 +51,8 @@
     "major": "CSE",
     "year": "Freshman",
     "interests": "Swimming",
-    "email": "rking@uw.edu"
+    "email": "rking@uw.edu",
+    "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
     },{
     "image": "../images/avatar.png",
     "fname": "Kathy",
@@ -55,7 +60,8 @@
     "major": "International Studies",
     "year": "Senior",
     "interests": "Running",
-    "email": "kathyw@uw.edu"
+    "email": "kathyw@uw.edu",
+    "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
     }, {
     "image": "../images/avatar.png",
     "fname": "Emily",
@@ -63,7 +69,7 @@
     "major": "Communications",
     "year": "Sophomore",
     "interests": "Swimming",
-    "email": "emkim@uw.edu"
+    "email": "emkim@uw.edu",
+    "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
     }
   ] 
-}

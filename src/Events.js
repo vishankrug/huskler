@@ -10,7 +10,7 @@ export function EventsList(props){
   let interestedCallback = props.interestedCallback;
   let events = props.events;
   let eventCards = events.map((event) => {
-    return <EventCard key={events.title} event={event} interestedCallback = {interestedCallback} />
+    return <EventCard key={event.title} event={event} interestedCallback = {interestedCallback} />
   })
    
   return(
@@ -37,7 +37,7 @@ export function EventCard(props) {
 
   return (
     <Col md="6" className="mt-4">
-      <Card tag="a" className="clickable" onClick={handleClick}>
+      <Card className="clickable" onClick={handleClick}>
         <div className="image-div">
           <img className="event-images" src={"images/" + event.image} alt={"an image for " + event.title} />
         </div>
@@ -45,7 +45,7 @@ export function EventCard(props) {
           <CardTitle tag="h3" className="text-center">{event.title}</CardTitle>
           <CardText className="text-center">{"Hosted by: " + event.hostedBy}</CardText>
           <CardText >{(event.description).substring(0,200) +"..."} </CardText>
-          <CardLink href="">Click to learn more!</CardLink>
+          <CardLink>Click to learn more!</CardLink>
         </CardBody>
       </Card>
 
@@ -74,7 +74,7 @@ export function EventPage(props){
       <p><strong>Date: </strong>{event.date}</p>
       <p><strong>Time: </strong>{event.time}</p>
       <p><strong>Location: </strong>{event.location}</p>
-      <p><strong>Link: </strong><a href={event.locationLink}>{event.locationLink}</a></p>
+      <p><strong>Link: </strong>{event.locationLink}</p>
       <p><strong>Description:</strong> <br></br> {event.description}</p>
       <button className="btn btn-primary">Interested!</button>
     </div>

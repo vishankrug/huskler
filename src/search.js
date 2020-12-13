@@ -25,22 +25,13 @@ export function SearchBarPage(){
 
     <form className="form">
         <label className="form-child">
-            First Name: <input type="text" name="first-name" />
-        </label>
-        <label className="form-child">
-            Last Name: <input type="text" name="last-name" />
+            Name: <input type="text" name="name" />
         </label>
         <label className="form-child">
             Major: <input type="text" name="major" />
         </label>
         <label className="form-child">
-            Class Standing: <input type="text" name="year" />
-        </label>
-        <label className="form-child">
-            Interests: <input type="text" name="interests" />
-        </label>
-        <label className="form-child">
-            Email: <input type="text" name="email" />
+            Interest: <input type="text" name="interests" />
         </label>
         <Button className="button"color="primary">Submit!</Button>
     </form>
