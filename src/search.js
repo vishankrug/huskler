@@ -4,50 +4,26 @@ import { Button } from 'reactstrap';
 import { useState } from 'react';
 
 
-export function SearchBarEvent(){
-
-    
+export function SearchBarEvent(props){
 
     return(
         <form className="form">
-            Event Name: <input type="text" name="event-name" />
-            Hosted By: <input type="text" name="hosted-by" />
-            <Button className="button" color="primary">Submit!</Button>
+            Event Name: <input type="text" name="eventName" value={props.eventNameState} onChange={props.updateEventNameSearch.bind()}/>
+            Hosted By: <input type="text" name="hostedBy" value={props.hostedByState} onChange={props.updateHostedBySearch.bind()}/>
+            <Button className="button" varient="Dark" onClick={props.clearEvents}>Clear</Button>
         </form>
     )
 }
 
-
-export function SearchBarPage(){
-
-    const [nameState, setNameSearch] = useState('John Doe');
-
-    const [majorState, setMajorSearch] = useState('Informatics');
-
-    const [interestsState, setInterestsSearch] = useState('Cycling');
-
-    const updateNameSearch = (event) => {
-        console.log(event.target.value);
-        setNameSearch(event.target.value);
-    }
-
-    const updateMajorSearch = (event) => {
-        console.log(event.target.value);
-        setMajorSearch(event.target.value);
-    }
-
-    const updateInterestsSearch = (event) => {
-        console.log(event.target.value);
-        setInterestsSearch(event.target.value);
-    }
+export function SearchBarPage(props){
 
     return(
 
     <form className="form">
-        Name: <input type="text" name="name" value={nameState} onChange={updateNameSearch.bind()}/>
-        Major: <input type="text" name="major" value={majorState} onChange={updateMajorSearch.bind()}/>
-        Interest: <input type="text" name="interests" value={interestsState} onChange={updateInterestsSearch.bind()}/>
-        <Button className="button"color="primary">Submit!</Button>
+        Name: <input type="text" name="name" value={props.nameState} onChange={props.updateNameSearch.bind()}/>
+        Major: <input type="text" name="major" value={props.majorState} onChange={props.updateMajorSearch.bind()}/>
+        Interest: <input type="text" name="interests" value={props.interestsState} onChange={props.updateInterestsSearch.bind()}/>
+        <Button className="button" varient="Dark" onClick={props.clearPeople}>Clear</Button>
     </form>
     )
   }

@@ -57,14 +57,12 @@ export function EventPage(props){
   let interestedCallback = props.interestedCallback;
   let eventName = useParams().eventName;
 
+
   let event = _.find(sample_events, {title:eventName});
  
   if(!event){
     return <h2>No event that matches</h2>
   }
-
-
-
 
   return(
     <div>
