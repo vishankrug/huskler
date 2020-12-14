@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import App from './App.js';
 import {BrowserRouter} from 'react-router-dom'
 import SAMPLE_EVENTS from './events.json'
-import SAMPLE_PEOPLE from './People.json'
+import SAMPLE_PEOPLE from './people.json'
 
 
 ReactDOM.render(

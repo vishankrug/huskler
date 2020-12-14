@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import { useParams } from "react-router-dom";
-import SAMPLE_PEOPLE from './People.json'
+import SAMPLE_PEOPLE from './people.json'
 
 
 export default function PeopleDetails(props){
