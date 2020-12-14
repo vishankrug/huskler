@@ -79,7 +79,7 @@ export function PeopleCard(props) {
         <p><strong>Class Standing: </strong>{person.year}</p>
         <p><strong>Email: </strong>{person.email}</p>
         <p><strong>Bio: </strong>{person.bio}</p>
-        <button className="btn btn-primary" onClick={handleClick}>Back</button>
+        <button className="button" varient="Dark" onClick={handleClick}>Back</button>
       </div>
     )
   }
