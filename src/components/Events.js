@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import _ from 'lodash';
 import {Card, CardText, CardBody,CardLink, CardTitle, Col, Row} from 'reactstrap';
-import {useFormik, setNestedObjectValues} from 'formik';
+import {Formik, useFormik, setNestedObjectValues} from 'formik';
 import {Redirect, useParams} from 'react-router-dom';
-import { BackButton } from './Buttons.js';
+import { BackButton, SubmitEventButton } from './Buttons.js';
 import { Button } from 'reactstrap';
 
 export function EventsList(props){
@@ -14,10 +14,13 @@ export function EventsList(props){
   })
    
   return(
-    <Row>
-      {eventCards}
-    </Row>
-
+    <div>
+      <SubmitEventButton />
+      <Row>
+        {eventCards}
+      </Row>
+    </div>
+    
   )
 }
 
@@ -94,71 +97,77 @@ export function EventSubmission(props){
     }
   });
   return(
-    <div>
+  
+    
+    <main>
+      <h1 className="text-center">Submit an event</h1>
+
       
-      <main>
-        <h1 className="text-center">Submit an event</h1>
 
-        <form onSubmit={formik.handleSubmit}>
-          <label>Title of event</label> <br></br>
-          <input 
-                type="title"
-                name="title"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={setNestedObjectValues.title}
-          /> <br></br>
+      <form onSubmit={formik.handleSubmit}>
+        <label>Title of event</label> <br></br>
+        <input 
+              type="title"
+              name="title"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={setNestedObjectValues.title}
+        /> <br></br>
 
-          <label>Hosted By</label> <br></br>
-          <input 
-                type="title"
-                name="title"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={setNestedObjectValues.title}
-          /> <br></br>
+        <label>Hosted By</label> <br></br>
+        <input 
+              type="title"
+              name="title"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={setNestedObjectValues.title}
+        /> <br></br>
 
-          <label>Date</label> <br></br>
-          <input 
-                type="title"
-                name="title"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={setNestedObjectValues.title}
-          /> <br></br>
+        <label>Date</label> <br></br>
+        <input 
+              type="title"
+              name="title"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={setNestedObjectValues.title}
+        /> <br></br>
 
-          <label>Location</label> <br></br>
-          <input 
-                type="title"
-                name="title"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={setNestedObjectValues.title}
-          /> <br></br>
+        <label>Location</label> <br></br>
+        <input 
+              type="title"
+              name="title"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={setNestedObjectValues.title}
+        /> <br></br>
 
-          <label>Description</label> <br></br>
-          <input 
-                type="title"
-                name="title"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={setNestedObjectValues.title}
-          /> <br></br>
+        <label>Description</label> <br></br>
+        <input 
+              type="title"
+              name="title"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={setNestedObjectValues.title}
+        /> <br></br>
 
-          <label>Image</label> <br></br>
-          <input 
-                type="title"
-                name="title"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={setNestedObjectValues.title}
-          /> <br></br>
-        </form>
-       
+        <label>Image</label> <br></br>
+        <input 
+              type="title"
+              name="title"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={setNestedObjectValues.title}
+        /> <br></br>
+        <Button>Submit</Button>
+        <BackButton page="/" />
+      </form>
+
       
-      </main>
+      
+    
+    </main>
 
-    </div>
+  
  
     
   )

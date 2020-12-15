@@ -1,27 +1,37 @@
 import React, {useState} from 'react';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect, Route } from 'react-router-dom';
 import {Button, Dropdown, DropdownToggle, DropdownMenu, DropdownItem} from 'reactstrap';
 import firebase from 'firebase/app';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import '../CSS/App.css'
+import { EventSubmission } from './Events';
 
 
 
 
 export function BackButton(props){
-  const [redirectTo, setRedirectTo] = useState(undefined);
 
-  if(redirectTo !== undefined){
-    return <Redirect push to={redirectTo} />
-  }
-
-  const handleClick = () => {
-    setRedirectTo(props.page);
-  }
 
   return(
-    <Button color="secondary" className="ml-3" onClick={handleClick}>Back</Button>
+    <Link to={props.page}>
+      <Button color="secondary" className="ml-3">Back</Button>
+    </Link>
+    
+  )
+
+}
+
+export function SubmitEventButton(){
+
+  return(
+    <div className="d-flex justify-content-end">
+      <Link to="/submit-event">
+        <Button className="mt-4 " >Submit Event</Button>
+      </Link>
+    </div>
+    
+    
   )
 
 }
