@@ -47,12 +47,11 @@ export function LogOutButton(){
 }
 
 export function EditProfileButton(){
-  const handleProfilePageRedirect = () => {
-
-  }
 
   return(
-    <DropdownItem onClick={handleProfilePageRedirect} className="clickable">Edit Profile</DropdownItem>
+    <Link to="/people-edit">
+    <DropdownItem className="clickable">Edit Profile</DropdownItem>
+    </Link>
   )
 }
 

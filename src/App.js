@@ -33,9 +33,6 @@ function App(props) {
   const people = props.people;
 
   // Search bar states
-  const [nameState, setNameSearch] = useState('');
-  const [majorState, setMajorSearch] = useState('');
-  const [interestsState, setInterestsSearch] = useState('');
   const [eventNameState, setEventNameSearch] = useState('');
   const [hostedByState, setHostedBySearch] = useState('');
 
@@ -57,21 +54,6 @@ function App(props) {
     })
   }
 
-  let filteredPeople = people.filter((person) => {
-    return (person.fname.toLowerCase().indexOf(nameState.toLowerCase()) !== -1 || person.lname.toLowerCase().indexOf(nameState.toLowerCase())!== -1) || ((person.fname.toLowerCase()+ " " + person.lname.toLowerCase()).indexOf(nameState.toLowerCase()) !== -1);
-  });
-
-  if(majorState !== ''){
-    filteredPeople = filteredPeople.filter((person) => {
-      return (person.major.toLowerCase().indexOf(majorState.toLowerCase()) !== -1);
-    });
-  }
-
-  if(interestsState !== ''){
-    filteredPeople = filteredPeople.filter((person) => {
-      return (person.interests.toLowerCase().indexOf(interestsState.toLowerCase()) !== -1);
-    });
-  }
 
   const handleClick = (eventName) => {
     const transmuted = events.map((event) => {
@@ -89,24 +71,6 @@ function App(props) {
 
   const updateHostedBySearch = (event) => {
     setHostedBySearch(event.target.value);
-  }
-
-  const updateNameSearch = (person) => {
-    setNameSearch(person.target.value);
-  }
-
-  const updateMajorSearch = (person) => {
-    setMajorSearch(person.target.value);
-  }
-
-  const updateInterestsSearch = (person) => {
-    setInterestsSearch(person.target.value);
-  } 
-
-  const clearPeople = () => {
-    setNameSearch('');
-    setInterestsSearch('');
-    setMajorSearch('');
   }
 
   const clearEvents = () => {
@@ -164,9 +128,6 @@ function App(props) {
 
           <div className="container">
             <div className="search-bar">
-            <Route exact path="/people" render={() => (
-              <SearchBarPage updateNameSearch={updateNameSearch} nameState={nameState} updateMajorSearch={updateMajorSearch} majorState={majorState} interestsState={interestsState} updateInterestsSearch={updateInterestsSearch} clearPeople={clearPeople} ></SearchBarPage>
-            )} />
             <Route exact path="/" render={() => (
               <SearchBarEvent updateEventNameSearch={updateEventNameSearch} eventNameState={eventNameState} updateHostedBySearch={updateHostedBySearch} hostedByState={hostedByState} clearEvents={clearEvents}></SearchBarEvent>
             )} />
@@ -174,7 +135,7 @@ function App(props) {
             <Switch>
               
             <Route exact path="/people" render={(routerProps) => (
-            <PeopleList {...routerProps} user={user} people={filteredPeople}></PeopleList>
+            <PeopleList {...routerProps} user={user} people={people}></PeopleList>
             )} />
 
           <Route exact path="/" render={(routerProps) => (
@@ -190,8 +151,8 @@ function App(props) {
             <EventPage {...routerProps} events={events}></EventPage>
           )}/>
 
-          <Route path="/people/edit" render={(routerProps) => (
-            <PeoplePopUp {...routerProps} user={user} people={people}></PeoplePopUp>
+          <Route path="/people-edit" render={() => (
+            <PeoplePopUp user={user} people={people}></PeoplePopUp>
           )}/>
 
           <Route path="/people/:fullname" render={(routerProps) => (

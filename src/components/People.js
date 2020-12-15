@@ -9,12 +9,56 @@ import { Button } from 'reactstrap';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
+import { SearchBarPage } from './Search.js';
 
 
 
 export function PeopleList(props){
-    let peoples = props.people;
-    let peopleCards = peoples.map((individual) => {
+    let people = props.people;
+  //search states
+  const [nameState, setNameSearch] = useState('');
+  const [majorState, setMajorSearch] = useState('');
+  const [interestsState, setInterestsSearch] = useState('');
+
+
+  //filter the results by search
+  let filteredPeople = people.filter((person) => {
+    return (person.fname.toLowerCase().indexOf(nameState.toLowerCase()) !== -1 || person.lname.toLowerCase().indexOf(nameState.toLowerCase())!== -1) || ((person.fname.toLowerCase()+ " " + person.lname.toLowerCase()).indexOf(nameState.toLowerCase()) !== -1);
+  });
+
+  if(majorState !== ''){
+    filteredPeople = filteredPeople.filter((person) => {
+      return (person.major.toLowerCase().indexOf(majorState.toLowerCase()) !== -1);
+    });
+  }
+
+  if(interestsState !== ''){
+    filteredPeople = filteredPeople.filter((person) => {
+      return (person.interests.toLowerCase().indexOf(interestsState.toLowerCase()) !== -1);
+    });
+  }
+
+  //setStates
+
+  const updateNameSearch = (person) => {
+    setNameSearch(person.target.value);
+  }
+
+  const updateMajorSearch = (person) => {
+    setMajorSearch(person.target.value);
+  }
+
+  const updateInterestsSearch = (person) => {
+    setInterestsSearch(person.target.value);
+  } 
+
+  const clearPeople = () => {
+    setNameSearch('');
+    setInterestsSearch('');
+    setMajorSearch('');
+  }
+
+    let peopleCards = filteredPeople.map((individual) => {
     return <PeopleCard key={individual.email} people={individual} />
   })
 
@@ -38,19 +82,11 @@ export function PeopleList(props){
 
   postUser(props.user);
 
-    const [redirectTo, setRedirectTo] = useState(undefined);
-
-    const handleClick = () => {
-      setRedirectTo("/people/edit");
-    }
-
-    if(redirectTo !== undefined){
-      return <Redirect push to={redirectTo} />
-    }
-
   return(
     <div>
-    <Button color="primary" className="btn" onClick={handleClick}>Edit Your Information!</Button>
+      <div className="search-bar">
+        <SearchBarPage updateNameSearch={updateNameSearch} nameState={nameState} updateMajorSearch={updateMajorSearch} majorState={majorState} interestsState={interestsState} updateInterestsSearch={updateInterestsSearch} clearPeople={clearPeople} ></SearchBarPage>
+      </div>
     <Row>
       {peopleCards}
     </Row>
