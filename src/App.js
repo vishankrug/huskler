@@ -1,11 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import ReactDOM from 'react-dom';
 import './CSS/App.css';
-import {NavBar, Footer, MainBar} from './Navigation.js'
+import {NavBar, Footer} from './components/Navigation.js'
 import {EventsList, EventSubmission, EventPage} from './Events.js'
 import {Container, Row, Col} from 'reactstrap'
 import { Route, Switch, Redirect, Link } from 'react-router-dom';
-import {PeopleList, PeopleDetails} from './People.js'
+import {PeopleList, PeopleDetails} from './people.js'
 import { SearchBarPage, SearchBarEvent } from './components/Search.js';
 import firebase from 'firebase';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';

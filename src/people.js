@@ -11,7 +11,6 @@ import {BackButton} from './components/Buttons.js';
 
 export function PeopleList(props){
     let peoples = props.people;
-
     let peopleCards = peoples.map((individual) => {
     return <PeopleCard key={individual.email} people={individual} />
   })
@@ -57,14 +56,8 @@ export function PeopleCard(props) {
   }
 
   export function PeopleDetails(props){
-    const [redirectTo, setRedirectTo] = useState(undefined);
     let fullname = useParams().fullname;
     let person =  _.find(sample_people, {fname:fullname});
-
-   
-
-    
-    
 
     return(
       <div>

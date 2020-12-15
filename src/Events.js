@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import _ from 'lodash';
-import {NavBar} from './Navigation.js';
 import {Card, CardText, CardBody,CardLink, CardTitle, Col, Row} from 'reactstrap';
 import {useFormik, setNestedObjectValues} from 'formik';
 import {Redirect, useParams} from 'react-router-dom';

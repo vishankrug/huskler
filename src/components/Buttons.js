@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import _ from 'lodash';
 import { Redirect } from 'react-router-dom';
 import {Button} from 'reactstrap';
 import firebase from 'firebase/app';
