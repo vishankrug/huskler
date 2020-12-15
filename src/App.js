@@ -1,14 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import './CSS/App.css';
 import {NavBar, Footer} from './components/Navigation.js'
-import {EventsList, EventSubmission, EventPage} from './Events.js'
-import {Container, Row, Col} from 'reactstrap'
+import {EventsList, EventSubmission, EventPage} from './components/Events.js'
+import {Container} from 'reactstrap'
 import { Route, Switch, Redirect, Link } from 'react-router-dom';
-import {PeopleList, PeopleDetails, PeoplePopUp} from './people.js'
+import {PeopleList, PeopleDetails, PeoplePopUp} from './components/People.js'
 import { SearchBarPage, SearchBarEvent } from './components/Search.js';
 import firebase from 'firebase';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import {LogOutButton} from './components/Buttons.js'
+import { SubmitEventButton } from './components/Buttons';
+
 
 const uiConfig = {
   signInOptions: [
@@ -131,19 +132,6 @@ function App(props) {
     }
   }, []) //only run hook on first load
 
-
-  const handleSignout = () => {
-    firebase.auth().signOut()
-  }
-
-  if(isLoading){
-    return(
-    <div className="text-center">
-      <i className="fa fa-spinner fa-spin fa-3x"></i>
-    </div>
-    ) 
-  }
-
   let content = null;
 
   if(!user){
@@ -183,15 +171,17 @@ function App(props) {
           <Route exact path="/" render={(routerProps) => (
             <EventsList {...routerProps} events={filteredEvents} interestedCallback={handleClick}></EventsList>
           )} />
-          
 
-          <Route path="/submit-events" component={EventSubmission} />
+          
+          <Route path="/submit-event" render={() => (
+            <EventSubmission />
+          )}/>
 
           <Route path="/event/:eventName" render={(routerProps) => (
             <EventPage {...routerProps} events={events}></EventPage>
           )}/>
 
-          <Route exact path="/people/edit" render={(routerProps) => (
+          <Route path="/people/edit" render={(routerProps) => (
             <PeoplePopUp {...routerProps} user={user} people={people}></PeoplePopUp>
           )}/>
 
