@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import _ from 'lodash';
 import { useParams } from "react-router-dom";
-import {BackButton} from './components/Buttons.js';
+import {BackButton} from './Buttons.js';
 import { Button } from 'reactstrap';
 import firebase from 'firebase/app';
 import 'firebase/auth';

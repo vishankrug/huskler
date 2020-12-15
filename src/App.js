@@ -1,14 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import './CSS/App.css';
 import {NavBar, Footer} from './components/Navigation.js'
-import {EventsList, EventSubmission, EventPage} from './Events.js'
-import {Container, Row, Col} from 'reactstrap'
+import {EventsList, EventSubmission, EventPage} from './components/Events.js'
+import {Container} from 'reactstrap'
 import { Route, Switch, Redirect, Link } from 'react-router-dom';
-import {PeopleList, PeopleDetails, PeoplePopUp} from './people.js'
+import {PeopleList, PeopleDetails, PeoplePopUp} from './components/People.js'
 import { SearchBarPage, SearchBarEvent } from './components/Search.js';
 import firebase from 'firebase';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import {LogOutButton} from './components/Buttons.js'
+
 
 const uiConfig = {
   signInOptions: [
@@ -130,7 +130,6 @@ function App(props) {
       authUnregisterFunction();
     }
   }, []) //only run hook on first load
-
 
   let content = null;
 

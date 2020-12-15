@@ -3,7 +3,7 @@ import _ from 'lodash';
 import {Card, CardText, CardBody,CardLink, CardTitle, Col, Row} from 'reactstrap';
 import {useFormik, setNestedObjectValues} from 'formik';
 import {Redirect, useParams} from 'react-router-dom';
-import { BackButton } from './components/Buttons.js';
+import { BackButton } from './Buttons.js';
 import { Button } from 'reactstrap';
 
 export function EventsList(props){

@@ -3,7 +3,7 @@ import '../CSS/App.css';
 import { Switch, Route, Link, Redirect, NavLink, useLocation } from 'react-router-dom';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faHome, faUsers } from '@fortawesome/free-solid-svg-icons';
-import {LogOutButton} from './Buttons.js';
+import {UserMenuButton} from './Buttons.js';
 
 
 export function NavBar(){
@@ -13,7 +13,7 @@ export function NavBar(){
     
     <div className="navbar-flex">
       <div className="navbar-child-a mx-2">
-        <NavLink className="navbar-navlink" exact to="/">huskler</NavLink>
+        <NavLink className="navbar-navlink" exact to="/">Huskler</NavLink>
       </div>
 
       <div className="navbar-child-b mx-2">
@@ -27,7 +27,7 @@ export function NavBar(){
         </ul> 
       </div>
       <div className="navbar-child-c mx-2">
-        <LogOutButton />
+        <UserMenuButton />
       
       </div>
     </div>

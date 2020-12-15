@@ -1,7 +1,12 @@
 import React, {useState} from 'react';
 import { Redirect } from 'react-router-dom';
-import {Button} from 'reactstrap';
+import {Button, Dropdown, DropdownToggle, DropdownMenu, DropdownItem} from 'reactstrap';
 import firebase from 'firebase/app';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+import '../CSS/App.css'
+
+
 
 
 export function BackButton(props){
@@ -27,6 +32,39 @@ export function LogOutButton(){
   }
 
   return(
-    <Button color="primary" onClick={handleLogOut}/>
+    <DropdownItem onClick={handleLogOut} className="clickable">Log Out</DropdownItem>
   )
 }
+
+export function EditProfileButton(){
+  const handleProfilePageRedirect = () => {
+
+  }
+
+  return(
+    <DropdownItem onClick={handleProfilePageRedirect} className="clickable">Edit Profile</DropdownItem>
+  )
+}
+
+export function UserMenuButton(){
+  let userIcon= <FontAwesomeIcon icon={faUser}/>;
+  const[dropdownOpen, setDropdownOpen] = useState(false);
+
+  const toggle = () => {
+    setDropdownOpen(prevState => !prevState);
+  }
+
+  return(
+    <Dropdown isOpen={dropdownOpen} toggle={toggle} >
+      <DropdownToggle className="navbar-navlink bg-secondary">
+        {userIcon}
+      </DropdownToggle>
+      <DropdownMenu right>
+        <EditProfileButton />
+        <LogOutButton />
+    
+      </DropdownMenu>
+    </Dropdown>
+  )
+}
+
