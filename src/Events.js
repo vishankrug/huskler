@@ -1,10 +1,8 @@
 import React, {useState} from 'react';
 import _ from 'lodash';
-import {NavBar} from './Navigation.js';
 import {Card, CardText, CardBody,CardLink, CardTitle, Col, Row} from 'reactstrap';
 import {useFormik, setNestedObjectValues} from 'formik';
 import {Redirect, useParams} from 'react-router-dom';
-import sample_events from './events.json';
 import { BackButton } from './components/Buttons.js';
 import { Button } from 'reactstrap';
 
@@ -58,8 +56,7 @@ export function EventCard(props) {
 export function EventPage(props){
   let interestedCallback = props.interestedCallback;
   let eventName = useParams().eventName;
-
-  let event = _.find(sample_events, {title:eventName});
+  let event = _.find(props.events, {title:eventName});
  
   if(!event){
     return <h2>No event that matches</h2>

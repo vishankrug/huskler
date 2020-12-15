@@ -1,11 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import ReactDOM from 'react-dom';
 import './CSS/App.css';
-import {NavBar, Footer, MainBar} from './Navigation.js'
+import {NavBar, Footer} from './components/Navigation.js'
 import {EventsList, EventSubmission, EventPage} from './Events.js'
 import {Container, Row, Col} from 'reactstrap'
 import { Route, Switch, Redirect, Link } from 'react-router-dom';
-import {PeopleList, PeopleDetails} from './People.js'
+import {PeopleList, PeopleDetails, PeoplePopUp} from './people.js'
 import { SearchBarPage, SearchBarEvent } from './components/Search.js';
 import firebase from 'firebase';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
@@ -43,6 +42,7 @@ function App(props) {
 
   const[user, setUser] = useState(undefined);
   const [interested, setInterested] = useState(events);
+  const [isLoading, setIsLoading] = useState(true);
 
   // Search bar code
 
@@ -116,18 +116,21 @@ function App(props) {
   //auth state event listener
   useEffect( () => { //run after component loads
     //listen to the the authentication state
-    firebase.auth().onAuthStateChanged((firebaseUser) =>{
+    const authUnregisterFunction = firebase.auth().onAuthStateChanged((firebaseUser) =>{
       if(firebaseUser){
         console.log("logged in as: " + firebaseUser.displayName)
         setUser(firebaseUser)
+        setIsLoading(false);
       }else{ //not defined, logged out
         setUser(null)
       }
     })
-  }
 
+    return function cleanup() {
+      authUnregisterFunction();
+    }
+  }, []) //only run hook on first load
 
-  )
 
   let content = null;
 
@@ -151,7 +154,7 @@ function App(props) {
           
 
           <div className="container">
-            <div className="search-bar mt-4">
+            <div className="search-bar">
             <Route exact path="/people" render={() => (
               <SearchBarPage updateNameSearch={updateNameSearch} nameState={nameState} updateMajorSearch={updateMajorSearch} majorState={majorState} interestsState={interestsState} updateInterestsSearch={updateInterestsSearch} clearPeople={clearPeople} ></SearchBarPage>
             )} />
@@ -162,7 +165,7 @@ function App(props) {
             <Switch>
               
             <Route exact path="/people" render={(routerProps) => (
-            <PeopleList {...routerProps} people={filteredPeople}></PeopleList>
+            <PeopleList {...routerProps} user={user} people={filteredPeople}></PeopleList>
             )} />
 
           <Route exact path="/" render={(routerProps) => (
@@ -171,9 +174,19 @@ function App(props) {
           
 
           <Route path="/submit-events" component={EventSubmission} />
-          <Route path="/event/:eventName" component={EventPage} />
 
-          <Route path="/people/:fullname" component={PeopleDetails}/>
+          <Route path="/event/:eventName" render={(routerProps) => (
+            <EventPage {...routerProps} events={events}></EventPage>
+          )}/>
+
+          <Route exact path="/people/edit" render={(routerProps) => (
+            <PeoplePopUp {...routerProps} user={user} people={people}></PeoplePopUp>
+          )}/>
+
+          <Route path="/people/:fullname" render={(routerProps) => (
+            <PeopleDetails {...routerProps} people={people}></PeopleDetails>
+          )}/>
+
           <Redirect to="/" />
         </Switch>
           

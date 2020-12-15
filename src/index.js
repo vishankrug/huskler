@@ -7,6 +7,7 @@ import SAMPLE_EVENTS from './events.json'
 import SAMPLE_PEOPLE from './people.json'
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import 'firebase/database';
 
 var firebaseConfig = {
   apiKey: "AIzaSyAHcZ5ndSGOaONB-HvQyhCiEQ4d9htFp2g",
