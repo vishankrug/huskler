@@ -42,6 +42,7 @@ function App(props) {
 
   const[user, setUser] = useState(undefined);
   const [interested, setInterested] = useState(events);
+  const [isLoading, setIsLoading] = useState(true);
 
   // Search bar code
 
@@ -115,21 +116,32 @@ function App(props) {
   //auth state event listener
   useEffect( () => { //run after component loads
     //listen to the the authentication state
-    firebase.auth().onAuthStateChanged((firebaseUser) =>{
+    const authUnregisterFunction = firebase.auth().onAuthStateChanged((firebaseUser) =>{
       if(firebaseUser){
         console.log("logged in as: " + firebaseUser.displayName)
         setUser(firebaseUser)
+        setIsLoading(false);
       }else{ //not defined, logged out
         setUser(null)
       }
     })
-  }
 
+    return function cleanup() {
+      authUnregisterFunction();
+    }
+  }, []) //only run hook on first load
 
-  )
 
   const handleSignout = () => {
     firebase.auth().signOut()
+  }
+
+  if(isLoading){
+    return(
+    <div className="text-center">
+      <i className="fa fa-spinner fa-spin fa-3x"></i>
+    </div>
+    ) 
   }
 
   let content = null;
@@ -154,7 +166,7 @@ function App(props) {
           
 
           <div className="container">
-            <div className="search-bar mt-4">
+            <div className="search-bar">
             <Route exact path="/people" render={() => (
               <SearchBarPage updateNameSearch={updateNameSearch} nameState={nameState} updateMajorSearch={updateMajorSearch} majorState={majorState} interestsState={interestsState} updateInterestsSearch={updateInterestsSearch} clearPeople={clearPeople} ></SearchBarPage>
             )} />
@@ -174,9 +186,15 @@ function App(props) {
           
 
           <Route path="/submit-events" component={EventSubmission} />
-          <Route path="/event/:eventName" component={EventPage} />
 
-          <Route path="/people/:fullname" component={PeopleDetails}/>
+          <Route path="/event/:eventName" render={(routerProps) => (
+            <EventPage {...routerProps} events={events}></EventPage>
+          )}/>
+
+          <Route path="/people/:fullname" render={(routerProps) => (
+            <PeopleDetails {...routerProps} people={people}></PeopleDetails>
+          )}/>
+
           <Redirect to="/" />
         </Switch>
           

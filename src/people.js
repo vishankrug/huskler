@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import _ from 'lodash';
 import { useParams } from "react-router-dom";
-import sample_people from './people.json';
 import {BackButton} from './components/Buttons.js';
 
 
@@ -57,7 +56,7 @@ export function PeopleCard(props) {
 
   export function PeopleDetails(props){
     let fullname = useParams().fullname;
-    let person =  _.find(sample_people, {fname:fullname});
+    let person =  _.find(props.people, {fname:fullname});
 
     return(
       <div>
