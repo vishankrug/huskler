@@ -129,10 +129,6 @@ function App(props) {
 
   )
 
-  const handleSignout = () => {
-    firebase.auth().signOut()
-  }
-
   let content = null;
 
   if(!user){
