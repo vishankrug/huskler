@@ -5,6 +5,10 @@ import { Redirect } from 'react-router-dom';
 import _ from 'lodash';
 import { useParams } from "react-router-dom";
 import {BackButton} from './components/Buttons.js';
+import { Button } from 'reactstrap';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/database';
 
 
 
@@ -13,12 +17,44 @@ export function PeopleList(props){
     let peopleCards = peoples.map((individual) => {
     return <PeopleCard key={individual.email} people={individual} />
   })
-   
+
+  
+  const postUser = (event) => {
+    //event.preventDefault();
+
+    const newPerson = {
+      name: props.user.displayName,
+      major: "-",
+      interest: "-",
+      year: "-",
+      email: props.user.email,
+      bio: "-"
+    }
+
+    const peopleRef = firebase.database().ref('people')
+    peopleRef.push(newPerson);
+
+  }
+
+  postUser(props.user);
+
+    const [redirectTo, setRedirectTo] = useState(undefined);
+
+    const handleClick = () => {
+      setRedirectTo("/people/edit");
+    }
+
+    if(redirectTo !== undefined){
+      return <Redirect push to={redirectTo} />
+    }
+
   return(
+    <div>
+    <Button color="primary" className="btn" onClick={handleClick}>Edit Your Information!</Button>
     <Row>
       {peopleCards}
     </Row>
-
+    </div>
   )
 }
 
@@ -70,5 +106,20 @@ export function PeopleCard(props) {
         <BackButton page="/people" />
         
       </div>
+    )
+  }
+
+  export function PeoplePopUp(props){
+    return(
+      <form className="form">
+        Name: <input type="text" name="name" value={props.user.displayName}/>
+        Major: <input type="text" name="major" value={''}/>
+        Interest: <input type="text" name="interests" value={''}/>
+        Class Standing: <input type="text" name="classStanding" value={''}/>
+        Email: <input type="text" name="classStanding" value={props.user.email}/>
+        Bio: <input type="text" name="classStanding" value={''}/>
+        <Button color="primary" className="btn">Save!</Button>
+        <BackButton page="/people" />
+    </form>
     )
   }

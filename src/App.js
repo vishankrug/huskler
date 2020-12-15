@@ -4,7 +4,7 @@ import {NavBar, Footer} from './components/Navigation.js'
 import {EventsList, EventSubmission, EventPage} from './Events.js'
 import {Container, Row, Col} from 'reactstrap'
 import { Route, Switch, Redirect, Link } from 'react-router-dom';
-import {PeopleList, PeopleDetails} from './people.js'
+import {PeopleList, PeopleDetails, PeoplePopUp} from './people.js'
 import { SearchBarPage, SearchBarEvent } from './components/Search.js';
 import firebase from 'firebase';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
@@ -177,7 +177,7 @@ function App(props) {
             <Switch>
               
             <Route exact path="/people" render={(routerProps) => (
-            <PeopleList {...routerProps} people={filteredPeople}></PeopleList>
+            <PeopleList {...routerProps} user={user} people={filteredPeople}></PeopleList>
             )} />
 
           <Route exact path="/" render={(routerProps) => (
@@ -189,6 +189,10 @@ function App(props) {
 
           <Route path="/event/:eventName" render={(routerProps) => (
             <EventPage {...routerProps} events={events}></EventPage>
+          )}/>
+
+          <Route exact path="/people/edit" render={(routerProps) => (
+            <PeoplePopUp {...routerProps} user={user} people={people}></PeoplePopUp>
           )}/>
 
           <Route path="/people/:fullname" render={(routerProps) => (
