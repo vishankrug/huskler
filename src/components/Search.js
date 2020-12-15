@@ -1,7 +1,7 @@
 import React from 'react';
-import './App.css';
+import '../CSS/App.css';
 import { Button } from 'reactstrap';
-import { useState } from 'react';
+
 
 
 export function SearchBarEvent(props){

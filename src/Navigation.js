@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
-import './App.css';
+import './CSS/App.css';
 import { Switch, Route, Link, Redirect, NavLink, useLocation } from 'react-router-dom';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faHome, faUsers } from '@fortawesome/free-solid-svg-icons';
+import {LogOutButton} from './components/Buttons.js';
 
 
 export function NavBar(){
@@ -26,7 +27,8 @@ export function NavBar(){
         </ul> 
       </div>
       <div className="navbar-child-c mx-2">
-      <NavLink className="navbar-navlink" exact to="/">log in</NavLink>
+        <LogOutButton />
+      
       </div>
     </div>
 

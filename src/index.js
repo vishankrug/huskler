@@ -5,6 +5,23 @@ import App from './App.js';
 import {BrowserRouter} from 'react-router-dom'
 import SAMPLE_EVENTS from './events.json'
 import SAMPLE_PEOPLE from './people.json'
+import firebase from 'firebase/app';
+import 'firebase/auth';
+
+var firebaseConfig = {
+  apiKey: "AIzaSyAHcZ5ndSGOaONB-HvQyhCiEQ4d9htFp2g",
+  authDomain: "huskler.firebaseapp.com",
+  projectId: "huskler",
+  storageBucket: "huskler.appspot.com",
+  messagingSenderId: "38236777921",
+  appId: "1:38236777921:web:036efef465faf5d6835340",
+  measurementId: "G-MKEZPQY6S6"
+};
+
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+
+
 
 
 ReactDOM.render(

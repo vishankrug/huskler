@@ -1,30 +1,50 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
-import './App.css';
+import './CSS/App.css';
 import {NavBar, Footer, MainBar} from './Navigation.js'
 import {EventsList, EventSubmission, EventPage} from './Events.js'
 import {Container, Row, Col} from 'reactstrap'
 import { Route, Switch, Redirect, Link } from 'react-router-dom';
 import {PeopleList, PeopleDetails} from './People.js'
-import { SearchBarPage, SearchBarEvent } from './search.js'
+import { SearchBarPage, SearchBarEvent } from './components/Search.js';
+import firebase from 'firebase';
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import {LogOutButton} from './components/Buttons.js'
 
+const uiConfig = {
+  signInOptions: [
+    {
+      provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+      requireDisplayName: true
+    },
+    firebase.auth.GoogleAuthProvider.PROVIDER_ID
+  ],
+  credentialHelper: 'none',
+  signInFlow: 'popup',
+  callbacks: {
+    signInSuccessWithAuthResult: () => false,
+  },
+
+};
 
 function App(props) {
 
   const events = props.events;
   const people = props.people;
 
+  // Search bar states
   const [nameState, setNameSearch] = useState('');
-
   const [majorState, setMajorSearch] = useState('');
-
   const [interestsState, setInterestsSearch] = useState('');
-
   const [eventNameState, setEventNameSearch] = useState('');
-
   const [hostedByState, setHostedBySearch] = useState('');
 
+  // Firebase state
+
+  const[user, setUser] = useState(undefined);
   const [interested, setInterested] = useState(events);
+
+  // Search bar code
 
   let filteredEvents = events.filter((event) => {
     return (event.title.toLowerCase().indexOf(eventNameState.toLowerCase()) !== -1);
@@ -93,54 +113,89 @@ function App(props) {
     setHostedBySearch('');
   }
 
-  return (
-    <div>
-      <nav>
-       <NavBar />
-       
-      </nav>
+  //auth state event listener
+  useEffect( () => { //run after component loads
+    //listen to the the authentication state
+    firebase.auth().onAuthStateChanged((firebaseUser) =>{
+      if(firebaseUser){
+        console.log("logged in as: " + firebaseUser.displayName)
+        setUser(firebaseUser)
+      }else{ //not defined, logged out
+        setUser(null)
+      }
+    })
+  }
 
 
-      <main>
+  )
+
+  const handleSignout = () => {
+    firebase.auth().signOut()
+  }
+
+  let content = null;
+
+  if(!user){
+    content = (
+      <Container>
+        <h1>Sign Up</h1>
+        <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+      </Container>
+    )
+  }else{
+    content =(
+      <div>
+        <nav>
+          <NavBar />
         
+        </nav>
 
-        <div className="container">
-          <div className="search-bar">
-          <Route exact path="/people" render={() => (
-            <SearchBarPage updateNameSearch={updateNameSearch} nameState={nameState} updateMajorSearch={updateMajorSearch} majorState={majorState} interestsState={interestsState} updateInterestsSearch={updateInterestsSearch} clearPeople={clearPeople} ></SearchBarPage>
-          )} />
-          <Route exact path="/" render={() => (
-            <SearchBarEvent updateEventNameSearch={updateEventNameSearch} eventNameState={eventNameState} updateHostedBySearch={updateHostedBySearch} hostedByState={hostedByState} clearEvents={clearEvents}></SearchBarEvent>
-          )} />
-          </div>
-          <Switch>
-            
-          <Route exact path="/people" render={(routerProps) => (
-           <PeopleList {...routerProps} people={filteredPeople}></PeopleList>
-          )} />
 
-         <Route exact path="/" render={(routerProps) => (
-          <EventsList {...routerProps} events={filteredEvents} interestedCallback={handleClick}></EventsList>
-         )} />
-         
-
-         <Route path="/submit-events" component={EventSubmission} />
-         <Route path="/event/:eventName" component={EventPage} />
-
-         <Route path="/people/:fullname" component={PeopleDetails}/>
-         <Redirect to="/" />
-       </Switch>
-        
+        <main>
           
-        </div>
-      </main>
 
-      <footer>
-        <Footer />
-      </footer>
+          <div className="container">
+            <div className="search-bar mt-4">
+            <Route exact path="/people" render={() => (
+              <SearchBarPage updateNameSearch={updateNameSearch} nameState={nameState} updateMajorSearch={updateMajorSearch} majorState={majorState} interestsState={interestsState} updateInterestsSearch={updateInterestsSearch} clearPeople={clearPeople} ></SearchBarPage>
+            )} />
+            <Route exact path="/" render={() => (
+              <SearchBarEvent updateEventNameSearch={updateEventNameSearch} eventNameState={eventNameState} updateHostedBySearch={updateHostedBySearch} hostedByState={hostedByState} clearEvents={clearEvents}></SearchBarEvent>
+            )} />
+            </div>
+            <Switch>
+              
+            <Route exact path="/people" render={(routerProps) => (
+            <PeopleList {...routerProps} people={filteredPeople}></PeopleList>
+            )} />
+
+          <Route exact path="/" render={(routerProps) => (
+            <EventsList {...routerProps} events={filteredEvents} interestedCallback={handleClick}></EventsList>
+          )} />
+          
+
+          <Route path="/submit-events" component={EventSubmission} />
+          <Route path="/event/:eventName" component={EventPage} />
+
+          <Route path="/people/:fullname" component={PeopleDetails}/>
+          <Redirect to="/" />
+        </Switch>
+          
+            
+          </div>
+        </main>
+
+        <footer>
+          <Footer />
+        </footer>
 
     </div>
  
+
+    )
+  }
+  return (
+   content
   );
 }
 

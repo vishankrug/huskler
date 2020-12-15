@@ -4,7 +4,8 @@ import { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import _ from 'lodash';
 import { useParams } from "react-router-dom";
-import sample_people from './People.json';
+import sample_people from './people.json';
+import {BackButton} from './components/Buttons.js';
 
 
 
@@ -60,15 +61,10 @@ export function PeopleCard(props) {
     let fullname = useParams().fullname;
     let person =  _.find(sample_people, {fname:fullname});
 
-    if(!person) return <h2>No person specified</h2>
+   
 
-    const handleClick = () => {
-      setRedirectTo("/people");
-    }
-
-    if(redirectTo !== undefined){
-      return <Redirect push to={redirectTo} />
-    }
+    
+    
 
     return(
       <div>
@@ -79,7 +75,8 @@ export function PeopleCard(props) {
         <p><strong>Class Standing: </strong>{person.year}</p>
         <p><strong>Email: </strong>{person.email}</p>
         <p><strong>Bio: </strong>{person.bio}</p>
-        <button className="button" varient="Dark" onClick={handleClick}>Back</button>
+        <BackButton page="/people" />
+        
       </div>
     )
   }
