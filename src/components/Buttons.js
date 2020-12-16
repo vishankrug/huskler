@@ -10,7 +10,7 @@ import { EventSubmission } from './Events';
 
 
 
-export function BackButton(props){
+export function BackButton(){
   let history = useHistory();
 
   return(

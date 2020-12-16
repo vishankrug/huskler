@@ -1,14 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import './CSS/App.css';
 import {NavBar, Footer} from './components/Navigation.js'
-import {EventsList, EventSubmission, EventPage} from './components/Events.js'
-import {Container} from 'reactstrap'
+import {EventsList, EventPage} from './components/Events.js'
 import { Route, Switch, Redirect, Link } from 'react-router-dom';
 import {PeopleList, PeopleDetails, PeoplePopUp} from './components/People.js'
-import { SearchBarPage, SearchBarEvent } from './components/Search.js';
 import firebase from 'firebase';
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import { SubmitEventButton } from './components/Buttons';
+import { LandingPage } from './components/LandingPage.js';
+import {EventSubmission} from './components/SubmissionPages.js';
 
 
 const uiConfig = {
@@ -32,11 +30,18 @@ function App(props) {
   const events = props.events;
   const people = props.people;
 
+  // Search bar states
+  const [eventNameState, setEventNameSearch] = useState('');
+  const [hostedByState, setHostedBySearch] = useState('');
+
   // Firebase state
 
   const[user, setUser] = useState(undefined);
   const [interested, setInterested] = useState(events);
   const [isLoading, setIsLoading] = useState(true);
+
+ 
+
 
   const handleClick = (eventName) => {
     const transmuted = events.map((event) => {
@@ -48,6 +53,9 @@ function App(props) {
     setInterested(transmuted);
   }
 
+  
+
+  //sa
   //auth state event listener
   useEffect( () => { //run after component loads
     //listen to the the authentication state
@@ -77,13 +85,14 @@ function App(props) {
   
   let content = null;
 
+  //Log in page
   if(!user){
     content = (
-      <Container>
-        <h1>Sign Up</h1>
-        <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
-      </Container>
+      <LandingPage uiConfig={uiConfig} />
+      
     )
+
+  // Home page + rest of page
   }else{
     content =(
       <div>
@@ -91,7 +100,6 @@ function App(props) {
           <NavBar />
         
         </nav>
-
 
         <main>
           

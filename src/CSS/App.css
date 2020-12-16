@@ -2,6 +2,24 @@
   font-family: Arial, sans-serif;  
 }
 
+.header-landing-page{
+  font-size: 3.5rem;
+  font-weight: bolder;
+  color: white;
+  
+}
+
+@media (min-width: 769px){
+  .header-landing-page{
+    font-size: 7rem;
+  }
+}
+
+.header-flex{
+  display: flex;
+  justify-content: center;
+  margin-top: 12rem;
+}
 
 /* Navbar */
 .navbar-flex{

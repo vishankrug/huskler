@@ -10,6 +10,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 import { SearchBarPage } from './Search.js';
+import {Formik, Form, Field} from 'formik';
 
 
 
@@ -76,7 +77,7 @@ export function PeopleList(props){
     }
 
     const peopleRef = firebase.database().ref('people')
-    peopleRef.push(newPerson);
+
 
   }
 
@@ -146,16 +147,76 @@ export function PeopleCard(props) {
   }
 
   export function PeoplePopUp(props){
+
+    const initialValues = {
+      name: props.user.displayName,
+      major: "-",
+      interest: "-",
+      year: "-",
+      email: props.user.email,
+      bio: "-"
+    }
+
+    const handleSubmit = (values) => {
+      let databasePeopleRef = firebase.database().ref('people');
+      databasePeopleRef.push(
+        {
+          name: values.name,
+          major: values.major,
+          interest: values.interest,
+          year: values.year,
+          bio: values.bio,
+
+        }
+      );
+    }  
+
+
     return(
-      <form className="form">
-        Name: <input type="text" name="name" value={props.user.displayName}/>
-        Major: <input type="text" name="major" value={''}/>
-        Interest: <input type="text" name="interests" value={''}/>
-        Class Standing: <input type="text" name="classStanding" value={''}/>
-        Email: <input type="text" name="classStanding" value={props.user.email}/>
-        Bio: <input type="text" name="classStanding" value={''}/>
-        <Button color="primary" className="btn">Save!</Button>
-        <BackButton />
-    </form>
+      <Formik {...{initialValues, handleSubmit}}>
+      {() => (
+        <Form className="baseForm" noValidate>
+          
+          <label className="mt-4">Name</label> <br></br>
+          <Field 
+            type="text"
+            id="title"
+            name="title"
+            /> <br></br>
+
+          <label className="mt-4">Major</label> <br></br>
+          <Field 
+            type="text"
+            id="hostedBy"
+            name="hostedBy"
+            /> <br></br>
+
+          <label className="mt-4">Year</label> <br></br>
+          <Field
+            type="text"
+            id="date"
+            name="date"
+            /> <br></br>
+
+          <label className="mt-4">Interest</label> <br></br>
+          <Field 
+            type="text"
+            id="time"
+            name="time"
+            /> <br></br>
+
+          <label className="mt-4">Bio</label> <br></br>
+          <textarea
+            id="location"
+            name="location"
+            rows="4"
+            cols="50"
+            /> <br></br>
+
+          <Button type="submit">Submit</Button>
+          <BackButton/>
+        </Form>
+      )}
+    </Formik>
     )
   }
