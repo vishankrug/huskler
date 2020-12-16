@@ -62,7 +62,7 @@ export function PeopleList(props){
   })
 
   
-  const postUser = (event) => {
+  /*const postUser = (event) => {
     //event.preventDefault();
 
     const newPerson = {
@@ -75,7 +75,7 @@ export function PeopleList(props){
     }
 
     const peopleRef = firebase.database().ref('people')
-
+*/
 
   }
 

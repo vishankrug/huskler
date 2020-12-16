@@ -1,21 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import _ from 'lodash';
 import {Card, CardText, CardBody,CardLink, CardTitle, Col, Row} from 'reactstrap';
-import {Formik, Form, Field} from 'formik';
 import {Redirect, useParams} from 'react-router-dom';
 import { BackButton, SubmitEventButton } from './Buttons.js';
 import { Button } from 'reactstrap';
 import { SearchBarEvent } from './Search.js';
 import firebase from 'firebase';
-<<<<<<< HEAD
-=======
-
->>>>>>> 19c7b8803ef61b8ff76a4f9c3e98d8de65fbd734
 
 
 export function EventsList(props){
   let interestedCallback = props.interestedCallback;
-  let events = props.events;
 
   const [eventNameState, setEventNameSearch] = useState('');
   const [hostedByState, setHostedBySearch] = useState('');

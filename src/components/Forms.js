@@ -128,7 +128,7 @@ export function EventsSubmissionForm(){
 
 export function PeopleForm(){
   let user = firebase.auth().currentUser;
-  let peopleRef = firebase.database.ref("people");
+  //let peopleRef = firebase.database.ref("people");
   const initialValues = {
     name: user.displayName, 
     major: "",

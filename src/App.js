@@ -36,12 +36,6 @@ function App(props) {
   const[user, setUser] = useState(undefined);
   const [isLoading, setIsLoading] = useState(true);
 
- 
-
-
-  
-  
-
   //sa
   //auth state event listener
   useEffect( () => { //run after component loads
@@ -113,7 +107,7 @@ function App(props) {
               <Route path="/people/:fullname" render={(routerProps) => (
               <PeopleDetails {...routerProps} people={people}></PeopleDetails>
               )}/>
-
+              
               <Redirect to="/" />
             </Switch>
           </div>
