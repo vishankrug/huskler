@@ -7,8 +7,6 @@ import { BackButton, SubmitEventButton } from './Buttons.js';
 import { Button } from 'reactstrap';
 import { SearchBarEvent } from './Search.js';
 import firebase from 'firebase';
-import { DatePicker } from 'react-datepicker';
-import FileUploader from 'react-firebase-file-uploader';
 
 
 export function EventsList(props){
