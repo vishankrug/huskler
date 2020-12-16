@@ -3,6 +3,7 @@ import {Formik, Form, Field} from 'formik';
 import firebase from 'firebase';
 
 import 'firebase/database';
+import 'firebase/auth';
 import {Button} from 'reactstrap';
 import {BackButton} from './Buttons'
 import { DatePicker } from 'react-datepicker';
@@ -128,7 +129,7 @@ export function EventsSubmissionForm(){
 
 export function PeopleForm(){
   let user = firebase.auth().currentUser;
-  let peopleRef = firebase.database.ref("people");
+  //let peopleRef = firebase.database.ref("people");
   const initialValues = {
     name: user.displayName, 
     major: "",
