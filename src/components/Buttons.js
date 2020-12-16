@@ -84,6 +84,7 @@ export function InterestedButton(props){
   let eventID = props.eventID;
 
   const handleClick = () => {
+    let userId = firebase.auth().currentUser.uid;
     let peopleRef = firebase.database.ref("people");
 
   }

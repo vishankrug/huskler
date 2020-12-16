@@ -47,7 +47,8 @@ export function EventsSubmissionForm(){
         date: values.date,
         location: values.location,
         description: values.description,
-        image: imageAsFile.name
+        image: imageAsFile.name,
+        
       }
     );
 
@@ -62,12 +63,6 @@ export function EventsSubmissionForm(){
       })
     })
 
-
-   
-   
-    
-    alert(JSON.stringify(values, null, 2));
-    
   }
 
 
@@ -132,18 +127,20 @@ export function EventsSubmissionForm(){
 
 
 export function PeopleForm(){
+  let user = firebase.auth().currentUser;
+  let peopleRef = firebase.database.ref("people");
   const initialValues = {
-    name: "", 
+    name: user.displayName, 
     major: "",
     interest: "",
     year: "",
-    email: "",
+    email: user.emailVerified,
     bio: ""
   }
 
   const handleSubmit = (values) => {
     let databasePeopleRef = firebase.database().ref('people');
-    databasePeopleRef.push(
+    databasePeopleRef.set(
       {
         name: values.name,
         major: values.major,
