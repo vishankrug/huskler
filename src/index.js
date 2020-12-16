@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 
 import App from './App.js';
 import {BrowserRouter} from 'react-router-dom'
-import SAMPLE_EVENTS from './events.json'
 import SAMPLE_PEOPLE from './people.json'
 import firebase from 'firebase/app';
 import 'firebase/auth';
@@ -19,6 +18,8 @@ var firebaseConfig = {
   measurementId: "G-MKEZPQY6S6"
 };
 
+
+
   firebase.initializeApp(firebaseConfig);
   firebase.analytics();
 
@@ -27,7 +28,7 @@ var firebaseConfig = {
 
 ReactDOM.render(
   <BrowserRouter>
-    <App events={SAMPLE_EVENTS} people={SAMPLE_PEOPLE}/>
+    <App  people={SAMPLE_PEOPLE}/>
   </BrowserRouter>,
   document.getElementById('root')
 );
