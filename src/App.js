@@ -1,15 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import './CSS/App.css';
 import {NavBar, Footer} from './components/Navigation.js'
-import {EventsList, EventSubmission, EventPage} from './components/Events.js'
-import {Container} from 'reactstrap'
+import {EventsList, EventPage} from './components/Events.js'
 import { Route, Switch, Redirect, Link } from 'react-router-dom';
 import {PeopleList, PeopleDetails, PeoplePopUp} from './components/People.js'
-import { SearchBarPage, SearchBarEvent } from './components/Search.js';
 import firebase from 'firebase';
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import { SubmitEventButton } from './components/Buttons';
-import { LandingPage } from './components/LandingPage';
+import { LandingPage } from './components/LandingPage.js';
+import {EventSubmission} from './components/SubmissionPages.js';
 
 
 const uiConfig = {
