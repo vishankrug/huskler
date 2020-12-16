@@ -147,7 +147,7 @@ export function PeopleForm(){
         interest: values.interest,
         year: values.year,
         bio: values.bio,
-
+        
       }
     );
   }  
