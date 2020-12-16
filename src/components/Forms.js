@@ -101,14 +101,14 @@ export function EventsSubmissionForm(){
   )
 }
 
-export function PeopleForm(props){
+export function PeopleForm(){
   const initialValues = {
-    name: props.user.displayName,
-    major: "-",
-    interest: "-",
-    year: "-",
-    email: props.user.email,
-    bio: "-"
+    name: "", 
+    major: "",
+    interest: "",
+    year: "",
+    email: "",
+    bio: ""
   }
 
   const handleSubmit = (values) => {
