@@ -6,7 +6,7 @@ import { Route, Switch, Redirect, Link } from 'react-router-dom';
 import {PeopleList, PeopleDetails, PeoplePopUp} from './components/People.js'
 import firebase from 'firebase';
 import { LandingPage } from './components/LandingPage.js';
-import {EventSubmission} from './components/SubmissionPages.js';
+import {EventSubmission, EditProfile} from './components/SubmissionPages.js';
 
 
 const uiConfig = {
@@ -98,45 +98,39 @@ function App(props) {
       <div>
         <nav>
           <NavBar />
-        
         </nav>
 
         <main>
-          
-
           <div className="container">
             <Switch>
-              
-            <Route exact path="/people" render={(routerProps) => (
-            <PeopleList {...routerProps} user={user} people={people}></PeopleList>
+              <Route exact path="/people" render={(routerProps) => (
+              <PeopleList {...routerProps} user={user} people={people}></PeopleList>
+              )} />
+
+              <Route exact path="/" render={(routerProps) => (
+              <EventsList {...routerProps} events={events} interestedCallback={handleClick}></EventsList>
             )} />
 
-          <Route exact path="/" render={(routerProps) => (
-            <EventsList {...routerProps} events={events} interestedCallback={handleClick}></EventsList>
-          )} />
+              <Route path="/submit-event" render={() => (
+              <EventSubmission />
+              )}/>
 
-          
-          <Route path="/submit-event" render={() => (
-            <EventSubmission />
-          )}/>
+              <Route path="/event/:eventName" render={(routerProps) => (
+              <EventPage {...routerProps} events={events}></EventPage>
+              )}/>
 
-          <Route path="/event/:eventName" render={(routerProps) => (
-            <EventPage {...routerProps} events={events}></EventPage>
-          )}/>
+              <Route path="/people-edit" render={() => (
+              <EditProfile user={user} people={people}></EditProfile>
+              )}/>
 
-          <Route path="/people-edit" render={() => (
-            <PeoplePopUp user={user} people={people}></PeoplePopUp>
-          )}/>
+              <Route path="/people/:fullname" render={(routerProps) => (
+              <PeopleDetails {...routerProps} people={people}></PeopleDetails>
+              )}/>
 
-          <Route path="/people/:fullname" render={(routerProps) => (
-            <PeopleDetails {...routerProps} people={people}></PeopleDetails>
-          )}/>
-
-          <Redirect to="/" />
-        </Switch>
-          
-            
+              <Redirect to="/" />
+            </Switch>
           </div>
+          
         </main>
 
         <footer>
