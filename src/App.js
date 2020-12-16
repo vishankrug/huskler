@@ -32,28 +32,11 @@ function App(props) {
   const events = props.events;
   const people = props.people;
 
-  // Search bar states
-  const [eventNameState, setEventNameSearch] = useState('');
-  const [hostedByState, setHostedBySearch] = useState('');
-
   // Firebase state
 
   const[user, setUser] = useState(undefined);
   const [interested, setInterested] = useState(events);
   const [isLoading, setIsLoading] = useState(true);
-
-  // Search bar code
-
-  let filteredEvents = events.filter((event) => {
-    return (event.title.toLowerCase().indexOf(eventNameState.toLowerCase()) !== -1);
-  });
-
-  if(hostedByState !== ''){
-    filteredEvents = events.filter((event) => {
-      return (event.hostedBy.toLowerCase().indexOf(hostedByState.toLowerCase()) !== -1);
-    })
-  }
-
 
   const handleClick = (eventName) => {
     const transmuted = events.map((event) => {
@@ -63,19 +46,6 @@ function App(props) {
       return event;
     })
     setInterested(transmuted);
-  }
-
-  const updateEventNameSearch = (event) => {
-    setEventNameSearch(event.target.value);
-  }
-
-  const updateHostedBySearch = (event) => {
-    setHostedBySearch(event.target.value);
-  }
-
-  const clearEvents = () => {
-    setEventNameSearch('');
-    setHostedBySearch('');
   }
 
   //auth state event listener
@@ -139,11 +109,6 @@ function App(props) {
           
 
           <div className="container">
-            <div className="search-bar">
-            <Route exact path="/" render={() => (
-              <SearchBarEvent updateEventNameSearch={updateEventNameSearch} eventNameState={eventNameState} updateHostedBySearch={updateHostedBySearch} hostedByState={hostedByState} clearEvents={clearEvents}></SearchBarEvent>
-            )} />
-            </div>
             <Switch>
               
             <Route exact path="/people" render={(routerProps) => (
@@ -151,7 +116,7 @@ function App(props) {
             )} />
 
           <Route exact path="/" render={(routerProps) => (
-            <EventsList {...routerProps} events={filteredEvents} interestedCallback={handleClick}></EventsList>
+            <EventsList {...routerProps} events={events} interestedCallback={handleClick}></EventsList>
           )} />
 
           
