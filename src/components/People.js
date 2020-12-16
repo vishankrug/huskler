@@ -155,7 +155,7 @@ export function PeopleCard(props) {
         Email: <input type="text" name="classStanding" value={props.user.email}/>
         Bio: <input type="text" name="classStanding" value={''}/>
         <Button color="primary" className="btn">Save!</Button>
-        <BackButton page="/people" />
+        <BackButton />
     </form>
     )
   }

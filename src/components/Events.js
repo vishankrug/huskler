@@ -79,7 +79,7 @@ export function EventPage(props){
       <p><strong>Link: </strong><a href={event.locationLink}>{event.locationLink}</a></p>
       <p><strong>Description:</strong> <br></br> {event.description}</p>
       <Button color="primary" className="btn">Interested!</Button>
-      <BackButton page="/" />
+      <BackButton />
     </div>
   )
 }
