@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Link, Redirect, Route } from 'react-router-dom';
+import { Link, useHistory} from 'react-router-dom';
 import {Button, Dropdown, DropdownToggle, DropdownMenu, DropdownItem} from 'reactstrap';
 import firebase from 'firebase/app';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -11,12 +11,11 @@ import { EventSubmission } from './Events';
 
 
 export function BackButton(props){
-
+  let history = useHistory();
 
   return(
-    <Link to={props.page}>
-      <Button color="secondary" className="ml-3">Back</Button>
-    </Link>
+     <Button color="secondary" onClick={() => history.goBack()} className="ml-3">Back</Button>
+   
     
   )
 

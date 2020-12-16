@@ -96,13 +96,13 @@ function App(props) {
     }
   }, []) //only run hook on first load
 
-  if(isLoading){
+  /*if(isLoading){
     return(
     <div className="text-center">
       <i className="fa fa-spinner fa-spin fa-3x"></i>
     </div>
     ) 
-  }
+  }*/
 
   
   let content = null;
