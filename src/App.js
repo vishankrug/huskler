@@ -9,6 +9,7 @@ import { SearchBarPage, SearchBarEvent } from './components/Search.js';
 import firebase from 'firebase';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { SubmitEventButton } from './components/Buttons';
+import { LandingPage } from './components/LandingPage';
 
 
 const uiConfig = {
@@ -32,11 +33,18 @@ function App(props) {
   const events = props.events;
   const people = props.people;
 
+  // Search bar states
+  const [eventNameState, setEventNameSearch] = useState('');
+  const [hostedByState, setHostedBySearch] = useState('');
+
   // Firebase state
 
   const[user, setUser] = useState(undefined);
   const [interested, setInterested] = useState(events);
   const [isLoading, setIsLoading] = useState(true);
+
+ 
+
 
   const handleClick = (eventName) => {
     const transmuted = events.map((event) => {
@@ -48,6 +56,9 @@ function App(props) {
     setInterested(transmuted);
   }
 
+  
+
+  //sa
   //auth state event listener
   useEffect( () => { //run after component loads
     //listen to the the authentication state
@@ -80,18 +91,7 @@ function App(props) {
   //Log in page
   if(!user){
     content = (
-      <div style={{ 
-        backgroundImage: "url(images/signup-page-background.jpg)", 
-        backgroundSize: "cover",
-        backgroundPosition: "center bottom",
-        height: "60vh",
-        border: "1px solid black",
-        }}>
-        <Container>
-        
-          <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
-      </Container>
-      </div>
+      <LandingPage uiConfig={uiConfig} />
       
     )
 
@@ -103,7 +103,6 @@ function App(props) {
           <NavBar />
         
         </nav>
-
 
         <main>
           

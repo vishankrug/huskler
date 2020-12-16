@@ -1,5 +1,8 @@
 import React from 'react';
 import {UncontrolledCarousel, Container} from 'reactstrap'
+import firebase from 'firebase';
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import '../CSS/App.css'
 
 
 export function LandingPage (props){
@@ -9,9 +12,13 @@ export function LandingPage (props){
       backgroundImage: "url(images/signup-page-background.jpg)", 
       backgroundSize: "cover",
       backgroundPosition: "center bottom",
-      height: "60vh",
+      height: "100vh",
       border: "1px solid black",
       }}>
+      <div className="header-flex">
+        <h1 className="header-landing-page">HUSKLER</h1>  
+      </div>
+      
       <Container>
         <StyledFirebaseAuth uiConfig={props.uiConfig} firebaseAuth={firebase.auth()} />
       </Container>
