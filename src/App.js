@@ -107,13 +107,25 @@ function App(props) {
   
   let content = null;
 
+  //Log in page
   if(!user){
     content = (
-      <Container>
-        <h1>Sign Up</h1>
-        <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+      <div style={{ 
+        backgroundImage: "url(images/signup-page-background.jpg)", 
+        backgroundSize: "cover",
+        backgroundPosition: "center bottom",
+        height: "60vh",
+        border: "1px solid black",
+        }}>
+        <Container>
+        
+          <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
       </Container>
+      </div>
+      
     )
+
+  // Home page + rest of page
   }else{
     content =(
       <div>
