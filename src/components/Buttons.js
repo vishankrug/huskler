@@ -38,10 +38,14 @@ export function SubmitEventButton(){
 export function LogOutButton(){
   const handleLogOut = () => {
     firebase.auth().signOut()
+     
   }
 
   return(
-    <DropdownItem onClick={handleLogOut} className="clickable">Log Out</DropdownItem>
+    <Link to="/">
+      <DropdownItem onClick={handleLogOut} className="clickable">Log Out</DropdownItem>
+    </Link>
+
   )
 }
 
@@ -76,3 +80,16 @@ export function UserMenuButton(){
   )
 }
 
+export function InterestedButton(props){
+  let eventID = props.eventID;
+
+  const handleClick = () => {
+    let userId = firebase.auth().currentUser.uid;
+    let peopleRef = firebase.database.ref("people");
+
+  }
+
+  return(
+    <Button onClick={handleClick} />
+  )
+}

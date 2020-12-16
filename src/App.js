@@ -30,29 +30,16 @@ function App(props) {
   const events = props.events;
   const people = props.people;
 
-  // Search bar states
-  const [eventNameState, setEventNameSearch] = useState('');
-  const [hostedByState, setHostedBySearch] = useState('');
 
   // Firebase state
 
   const[user, setUser] = useState(undefined);
-  const [interested, setInterested] = useState(events);
   const [isLoading, setIsLoading] = useState(true);
 
  
 
 
-  const handleClick = (eventName) => {
-    const transmuted = events.map((event) => {
-      if(events.name === eventName){
-        event.isInterested = !event.isInterested;
-      }
-      return event;
-    })
-    setInterested(transmuted);
-  }
-
+  
   
 
   //sa
@@ -108,7 +95,7 @@ function App(props) {
               )} />
 
               <Route exact path="/" render={(routerProps) => (
-              <EventsList {...routerProps} events={events} interestedCallback={handleClick}></EventsList>
+              <EventsList {...routerProps}  ></EventsList>
             )} />
 
               <Route path="/submit-event" render={() => (

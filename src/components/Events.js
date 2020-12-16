@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import _ from 'lodash';
 import {Card, CardText, CardBody,CardLink, CardTitle, Col, Row} from 'reactstrap';
 import {Formik, Form, Field} from 'formik';
@@ -7,6 +7,10 @@ import { BackButton, SubmitEventButton } from './Buttons.js';
 import { Button } from 'reactstrap';
 import { SearchBarEvent } from './Search.js';
 import firebase from 'firebase';
+<<<<<<< HEAD
+=======
+
+>>>>>>> 19c7b8803ef61b8ff76a4f9c3e98d8de65fbd734
 
 
 export function EventsList(props){
@@ -15,13 +19,30 @@ export function EventsList(props){
 
   const [eventNameState, setEventNameSearch] = useState('');
   const [hostedByState, setHostedBySearch] = useState('');
+  const [eventsArray, setEvents] = useState([]); //array
 
-  let filteredEvents = events.filter((event) => {
+  useEffect(() => {
+    const eventRef = firebase.database().ref("events");
+    eventRef.on("value", (snapshot) => {
+      const eventsObject = snapshot.val() //converts to JS value
+      let objectKeyArray = Object.keys(eventsObject);
+      let eventsArray = objectKeyArray.map((key) => {
+        let singleEventObject = eventsObject[key];
+        singleEventObject.key = key;
+        return singleEventObject;
+      })
+      setEvents(eventsArray);
+    })
+  }, [])
+
+ 
+
+  let filteredEvents = eventsArray.filter((event) => {
     return (event.title.toLowerCase().indexOf(eventNameState.toLowerCase()) !== -1);
   });
 
   if(hostedByState !== ''){
-    filteredEvents = events.filter((event) => {
+    filteredEvents = eventsArray.filter((event) => {
       return (event.hostedBy.toLowerCase().indexOf(hostedByState.toLowerCase()) !== -1);
     })
   }
@@ -41,10 +62,13 @@ export function EventsList(props){
 
 
 
-  let eventCards = filteredEvents.map((event) => {
-    return <EventCard key={events.title} event={event} interestedCallback = {interestedCallback} />
+  let eventCards = filteredEvents.map((eventsArray) => {
+    return <EventCard key={eventsArray.title} event={eventsArray} interestedCallback = {interestedCallback} />
   })
-   
+
+
+
+ 
   return(
     <div>
       <div className="search-bar">
@@ -57,8 +81,10 @@ export function EventsList(props){
     </div>
     
   )
+  
 }
 
+//////// EVENT CARD /////////
 export function EventCard(props) {
   let interestedCallback = props.interestedCallback;
   let event = props.event;
@@ -77,7 +103,7 @@ export function EventCard(props) {
     <Col md="6" className="mt-4">
       <Card tag="a" className="clickable" onClick={handleClick}>
         <div className="image-div">
-          <img className="event-images" src={"images/" + event.image} alt={"an image for " + event.title} />
+          <img className="event-images" src={event.image} alt={"an image for " + event.title} />
         </div>
         <CardBody>
           <CardTitle tag="h3" className="text-center">{event.title}</CardTitle>
@@ -91,10 +117,32 @@ export function EventCard(props) {
   )
 }
 
+
+////// EVENT PAGE /////
 export function EventPage(props){
+  
+  const [eventsArray, setEvents] = useState([]); //array
+  useEffect(() => {
+    const eventRef = firebase.database().ref("events");
+    eventRef.on("value", (snapshot) => {
+      const eventsObject = snapshot.val() //converts to JS value
+      let objectKeyArray = Object.keys(eventsObject);
+      let eventsArray = objectKeyArray.map((key) => {
+        let singleEventObject = eventsObject[key];
+        singleEventObject.key = key;
+        return singleEventObject;
+      })
+      setEvents(eventsArray);
+    })
+  }, [])
+
+
+
   let interestedCallback = props.interestedCallback;
   let eventName = useParams().eventName;
-  let event = _.find(props.events, {title:eventName});
+  let event = _.find(eventsArray, {title:eventName});
+
+  
  
   if(!event){
     return <h2>No event that matches</h2>
@@ -105,7 +153,7 @@ export function EventPage(props){
 
   return(
     <div>
-      <img src={"../images/" + event.image} alt={event.title} className="event-images-lg mt-5" />
+      <img src={"../images/" + event.image} alt={"an image of " + event.title} className="event-images-lg mt-5" />
       <h2>{event.title}</h2>
       <p><strong>Hosted by: </strong>{event.hostedBy}</p>
       <p><strong>Date: </strong>{event.date}</p>
