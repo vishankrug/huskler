@@ -35,7 +35,18 @@ function App(props) {
 
   const[user, setUser] = useState(undefined);
   const [isLoading, setIsLoading] = useState(true);
+ 
 
+<<<<<<< HEAD
+=======
+  
+ 
+
+
+  
+  
+
+>>>>>>> e5503217237d350499cca056bfd745be433525aa
   //sa
   //auth state event listener
   useEffect( () => { //run after component loads

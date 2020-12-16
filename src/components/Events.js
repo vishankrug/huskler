@@ -1,6 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import _ from 'lodash';
+<<<<<<< HEAD
 import {Card, CardText, CardBody,CardLink, CardTitle, Col, Row} from 'reactstrap';
+=======
+import {Card, CardText, CardBody, CardFooter, CardLink, CardTitle, Col, Row} from 'reactstrap';
+import {Formik, Form, Field} from 'formik';
+>>>>>>> e5503217237d350499cca056bfd745be433525aa
 import {Redirect, useParams} from 'react-router-dom';
 import { BackButton, SubmitEventButton } from './Buttons.js';
 import { Button } from 'reactstrap';
@@ -14,7 +19,9 @@ export function EventsList(props){
   const [eventNameState, setEventNameSearch] = useState('');
   const [hostedByState, setHostedBySearch] = useState('');
   const [eventsArray, setEvents] = useState([]); //array
+  const [interestedEventsFull, setInterested] = useState(eventsArray);
 
+  ///// Gets all data from firebase /////
   useEffect(() => {
     const eventRef = firebase.database().ref("events");
     eventRef.on("value", (snapshot) => {
@@ -23,20 +30,43 @@ export function EventsList(props){
       let eventsArray = objectKeyArray.map((key) => {
         let singleEventObject = eventsObject[key];
         singleEventObject.key = key;
+        singleEventObject.isInterested = false;
+
         return singleEventObject;
       })
       setEvents(eventsArray);
+      setInterested(eventsArray);
     })
   }, [])
 
- 
+  
 
-  let filteredEvents = eventsArray.filter((event) => {
+  console.log(interestedEventsFull);
+
+  ///// Handle interested /////
+  const handleInterestedClick = (eventName) => {
+
+    
+    
+    const interestedEvents = eventsArray.map((event) => {
+      console.log(event.title);
+      if(event.name === eventName){
+        event.isInterested = !event.isInterested;
+      }
+      return event;
+    })
+    
+    setInterested(interestedEvents);
+  }
+
+ 
+  ////// Search function /////
+  let filteredEvents = interestedEventsFull.filter((event) => {
     return (event.title.toLowerCase().indexOf(eventNameState.toLowerCase()) !== -1);
   });
 
   if(hostedByState !== ''){
-    filteredEvents = eventsArray.filter((event) => {
+    filteredEvents = interestedEventsFull.filter((event) => {
       return (event.hostedBy.toLowerCase().indexOf(hostedByState.toLowerCase()) !== -1);
     })
   }
@@ -57,7 +87,7 @@ export function EventsList(props){
 
 
   let eventCards = filteredEvents.map((eventsArray) => {
-    return <EventCard key={eventsArray.title} event={eventsArray} interestedCallback = {interestedCallback} />
+    return <EventCard key={eventsArray.title} event={eventsArray} interestedCallback = {interestedCallback} adoptInterestedCallback={handleInterestedClick} />
   })
 
 
@@ -80,7 +110,7 @@ export function EventsList(props){
 
 //////// EVENT CARD /////////
 export function EventCard(props) {
-  let interestedCallback = props.interestedCallback;
+  let interestedCallback = props.adoptInterestedCallback;
   let event = props.event;
 
   const[redirectTo, setRedirectTo] = useState(undefined);
@@ -95,16 +125,20 @@ export function EventCard(props) {
 
   return (
     <Col md="6" className="mt-4">
-      <Card tag="a" className="clickable" onClick={handleClick}>
+      <Card>
         <div className="image-div">
           <img className="event-images" src={event.image} alt={"an image for " + event.title} />
         </div>
-        <CardBody>
+        <CardBody className="clickable" onClick={handleClick}>
           <CardTitle tag="h3" className="text-center">{event.title}</CardTitle>
           <CardText className="text-center">{"Hosted by: " + event.hostedBy}</CardText>
           <CardText >{(event.description).substring(0,200) +"..."} </CardText>
           <CardLink href="">Click to learn more!</CardLink>
         </CardBody>
+        <CardFooter> 
+          <Button onClick={() => interestedCallback(event.name)}>Interested</Button>
+          <p> {event.isInterested ? "You are interested in this event!" : "no" }</p>
+        </CardFooter>
       </Card>
 
     </Col>

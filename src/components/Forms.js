@@ -3,6 +3,7 @@ import {Formik, Form, Field} from 'formik';
 import firebase from 'firebase';
 
 import 'firebase/database';
+import 'firebase/auth';
 import {Button} from 'reactstrap';
 import {BackButton} from './Buttons'
 import { DatePicker } from 'react-datepicker';
