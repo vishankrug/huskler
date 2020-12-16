@@ -5,16 +5,50 @@ import {Formik, useFormik, setNestedObjectValues} from 'formik';
 import {Redirect, useParams} from 'react-router-dom';
 import { BackButton, SubmitEventButton } from './Buttons.js';
 import { Button } from 'reactstrap';
+import { SearchBarEvent } from './Search.js';
+
 
 export function EventsList(props){
   let interestedCallback = props.interestedCallback;
   let events = props.events;
-  let eventCards = events.map((event) => {
+
+  const [eventNameState, setEventNameSearch] = useState('');
+  const [hostedByState, setHostedBySearch] = useState('');
+
+  let filteredEvents = events.filter((event) => {
+    return (event.title.toLowerCase().indexOf(eventNameState.toLowerCase()) !== -1);
+  });
+
+  if(hostedByState !== ''){
+    filteredEvents = events.filter((event) => {
+      return (event.hostedBy.toLowerCase().indexOf(hostedByState.toLowerCase()) !== -1);
+    })
+  }
+
+  const updateEventNameSearch = (event) => {
+    setEventNameSearch(event.target.value);
+  }
+
+  const updateHostedBySearch = (event) => {
+    setHostedBySearch(event.target.value);
+  }
+
+  const clearEvents = () => {
+    setEventNameSearch('');
+    setHostedBySearch('');
+  }
+
+
+
+  let eventCards = filteredEvents.map((event) => {
     return <EventCard key={events.title} event={event} interestedCallback = {interestedCallback} />
   })
    
   return(
     <div>
+      <div className="search-bar">
+        <SearchBarEvent updateEventNameSearch={updateEventNameSearch} eventNameState={eventNameState} updateHostedBySearch={updateHostedBySearch} hostedByState={hostedByState} clearEvents={clearEvents}></SearchBarEvent>
+      </div>
       <SubmitEventButton />
       <Row>
         {eventCards}
