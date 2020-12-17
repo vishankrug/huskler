@@ -98,7 +98,6 @@ export function EventsList(props){
 export function EventCard(props) {
   
   let event = props.event;
-  let title = event.title;
   let adoptHandleInterestedClick = props.adoptHandleInterestedClick;
 
 

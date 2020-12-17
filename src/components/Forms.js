@@ -5,9 +5,7 @@ import 'firebase/database';
 import 'firebase/auth';
 import {Button} from 'reactstrap';
 import {BackButton} from './Buttons'
-//import { faLeaf } from '@fortawesome/free-solid-svg-icons';
-//import { DatePicker } from 'react-datepicker';
-//import FileUploader from 'react-firebase-file-uploader';
+
 
 
 
@@ -24,7 +22,6 @@ export function EventsSubmissionForm(props){
     }
   }
 
-  console.log(keyOfCurrentUser);
 
   const initialValues = {
     titlea: '', 
@@ -41,7 +38,6 @@ export function EventsSubmissionForm(props){
 
   const onSubmit = (values) =>{
     let databaseRef = firebase.database().ref('events');
-    console.log("Hello");
 
     databaseRef.push(
       {
