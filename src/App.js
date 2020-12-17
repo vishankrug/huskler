@@ -9,7 +9,6 @@ import { LandingPage } from './components/LandingPage.js';
 import {EventSubmission, EditProfile} from './components/SubmissionPages.js';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-//import 'font-awesome/css/font-awesome.css';
 
 
 const uiConfig = {
@@ -109,7 +108,6 @@ function App(props) {
 
   }, [])
 
-  //console.log(eventsArray);
 
     ///// EVENTS: Gets all data from firebase /////
   
@@ -131,17 +129,10 @@ function App(props) {
     }
     
     const interestedEvents = eventsArray.map((event) => {
-      //console.log("Props Title: " + event.title);
-      //console.log("Event Title: " + eventTitle);
-      //console.log(typeof event.key);
       if(event.title === eventTitle){
         const refEvents = firebase.database().ref("events").child(event.key)
         
         const refInterestedPeople = firebase.database().ref("events/" + event.key + "/interestedPeople");
-
-        
-        const refPeople =firebase.database().ref("people");
-
 
         refInterestedPeople.push(keyOfCurrentUser);
         refEvents.update({isInterested: !event.isInterested})
@@ -153,11 +144,8 @@ function App(props) {
     setInterested(interestedEvents);
   }
 
-  //console.log(interestedEventsFull);
-  console.log(interestedEventsFull);
-  
   let content = null;
-
+/*
   if(isLoading){
     return(
     <div className="text-center">
@@ -165,7 +153,7 @@ function App(props) {
     </div>
     ) 
   }
-
+*/
 
   //Log in page
   if(!user){

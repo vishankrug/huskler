@@ -24,7 +24,6 @@ export function EventsSubmissionForm(props){
     }
   }
 
-  console.log(keyOfCurrentUser);
 
   const initialValues = {
     titlea: '', 
@@ -41,7 +40,6 @@ export function EventsSubmissionForm(props){
 
   const onSubmit = (values) =>{
     let databaseRef = firebase.database().ref('events');
-    console.log("Hello");
 
     databaseRef.push(
       {
@@ -108,14 +106,9 @@ export function EventsSubmissionForm(props){
             name="description"
             className="mb-5"
             /> <br></br>
-<<<<<<< HEAD
-          
-          <Button type="submit">Submit</Button>
-=======
           <Link to="/">
           <Button type="submit" className="mt-5">Submit</Button>
           </Link>
->>>>>>> cde3d7aacab3abd901b9c1b4d81045134c59ad45
           <BackButton/>
 
         </Form>
