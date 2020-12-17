@@ -13,12 +13,6 @@ import {BackButton} from './Buttons'
 
 
 export function EventsSubmissionForm(){
-  
-  /* A huge thank you to Tallan Groberg, Code from https://dev.to/itnext/how-to-do-image-upload-with-firebase-in-react-cpj */
-
-  const allInputs = {imgUrl: ""};
-  const [imageAsUrl, setImageAsUrl] = useState(allInputs);
-  const [imageAsFile, setImageAsFile] = useState('');
 
   const initialValues = {
     titlea: '', 
@@ -31,15 +25,9 @@ export function EventsSubmissionForm(){
     isInterested: '',
   }
 
-  const handleImageAsFile = (event) => {
-    const img = event.target.files[0];
-    setImageAsFile((img))
-    
-  }
 
   const onSubmit = (values) =>{
     let databaseRef = firebase.database().ref('events');
-    let uploadTask = firebase.storage().ref(`/image/${imageAsFile.name}`).put(imageAsFile);
    
 
     databaseRef.push(
@@ -50,23 +38,12 @@ export function EventsSubmissionForm(){
         date: values.date,
         location: values.location,
         description: values.description,
-        image: imageAsFile.name,
+        image: 'temp-background.jpg',
         isInterested: false,
         interestedPeople: [],
         
       }
     );
-
-    uploadTask.on("state_change",
-    (snapshot) => {
-      console.log(snapshot)
-    }, (err) => {
-      console.log(err)
-    }, () => {
-      firebase.storage().ref("images").child(imageAsFile.name).getDownloadURL().then(fireBaseUrl => {
-        setImageAsUrl(prevObject => ({...prevObject, imgUrl: fireBaseUrl}))
-      })
-    })
 
   }
 
@@ -117,12 +94,9 @@ export function EventsSubmissionForm(){
             id="description"
             name="description"
             /> <br></br>
-
-          <label className="mt-4">Upload an image</label> <br></br>
-          <input type="file" id="image" name="image" onChange={handleImageAsFile}/><br></br>
-         
           
           <Button type="submit" className="mt-5">Submit</Button>
+          <BackButton/>
 
         </Form>
       )}
@@ -136,7 +110,6 @@ export function PeopleForm(props){
   //let peopleRef = firebase.database.ref("people");
 
   let keyOfCurrentUser;
-  console.log(props);
 
   for(let i = 0; i < props.peopleArray.length; i++) {
     if(props.peopleArray[i].email === user.email){
@@ -168,21 +141,11 @@ export function PeopleForm(props){
         year: values.year,
         email: user.email,
         bio: values.bio,
-        image: imageAsFile.name
+        image: 'images/avatar.png'
       
     }
     firebase.database().ref('people/'+keyOfCurrentUser).update(updatePerson);
   }  
-
-  const allInputs = {imgUrl: ""};
-  const [imageAsUrl, setImageAsUrl] = useState(allInputs);
-  const [imageAsFile, setImageAsFile] = useState('');
-
-  const handleImageAsFile = (event) => {
-    const img = event.target.files[0];
-    setImageAsFile((img))
-    
-  }
 
 
   return(
@@ -238,10 +201,6 @@ export function PeopleForm(props){
           id="bio"
           name="bio"
           /> <br></br>
-
-
-        <label className="mt-4">Upload an image</label> <br></br>
-          <input type="file" id="image" name="image" onChange={handleImageAsFile}/><br></br>
 
         <Button type="submit">Submit</Button>
         <BackButton/>

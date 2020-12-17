@@ -60,26 +60,6 @@ export function PeopleList(props){
     return <PeopleCard key={individual.email} people={individual} />
   })
 
-  //grabbing text before and after space
-  //let fnameUpdate = props.user.displayName.substr(0, props.user.displayName.indexOf(' '));
-  //let lnameUpdate = props.user.displayName.substr(props.user.displayName.indexOf(' ')+1, props.user.displayName.length);
-
-
-/*
-  if(peopleEmails.indexOf(props.user.email) == -1) {
-    const newPerson = {
-      fname: fnameUpdate,
-      lname: lnameUpdate,
-      major: "-",
-      interest: "-",
-      year: "-",
-      email: props.user.email,
-      bio: "-",
-      image: "-"
-    }
-    firebase.database().ref('people').push(newPerson);
-  }
-*/
   return(
     <div>
       <div className="search-bar">

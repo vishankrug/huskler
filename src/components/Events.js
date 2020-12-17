@@ -117,7 +117,7 @@ export function EventCard(props) {
     <Col md="6" className="mt-4">
       <Card>
         <div className="image-div">
-          <img className="event-images" src={event.image} alt={"an image for " + event.title} />
+          <img className="event-images" src={"../images/"+event.image} alt={"an image for " + event.title} />
         </div>
         <CardBody className="clickable" onClick={() => handleClick(event.name) }>
 
