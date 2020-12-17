@@ -6,8 +6,9 @@ import 'firebase/database';
 import 'firebase/auth';
 import {Button} from 'reactstrap';
 import {BackButton} from './Buttons'
-import { DatePicker } from 'react-datepicker';
-import FileUploader from 'react-firebase-file-uploader';
+import { faLeaf } from '@fortawesome/free-solid-svg-icons';
+//import { DatePicker } from 'react-datepicker';
+//import FileUploader from 'react-firebase-file-uploader';
 
 
 
@@ -27,6 +28,7 @@ export function EventsSubmissionForm(){
     location: '', 
     description: '', 
     image: '',
+    isInterest: '',
   }
 
   const handleImageAsFile = (event) => {
@@ -49,6 +51,7 @@ export function EventsSubmissionForm(){
         location: values.location,
         description: values.description,
         image: imageAsFile.name,
+        isInterested: false,
         
       }
     );

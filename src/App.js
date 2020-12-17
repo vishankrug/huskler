@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import './CSS/App.css';
 import {NavBar, Footer} from './components/Navigation.js'
-import {EventsList, EventPage} from './components/Events.js'
-import { Route, Switch, Redirect, Link } from 'react-router-dom';
-import {PeopleList, PeopleDetails, PeoplePopUp} from './components/People.js'
+import {EventsIndividualPage, EventsMainPage} from './components/Events.js'
+import { Route, Switch, Redirect} from 'react-router-dom';
+import {PeopleList, PeopleDetails} from './components/People.js'
 import firebase from 'firebase';
 import { LandingPage } from './components/LandingPage.js';
 import {EventSubmission, EditProfile} from './components/SubmissionPages.js';
@@ -36,15 +36,7 @@ function App(props) {
   const[user, setUser] = useState(undefined);
   const [isLoading, setIsLoading] = useState(true);
  
-
   
- 
-
-
-  
-  
-
-  //sa
   //auth state event listener
   useEffect( () => { //run after component loads
     //listen to the the authentication state
@@ -97,7 +89,7 @@ function App(props) {
               )} />
 
               <Route exact path="/" render={(routerProps) => (
-              <EventsList {...routerProps}  ></EventsList>
+              <EventsMainPage {...routerProps}  ></EventsMainPage>
             )} />
 
               <Route path="/submit-event" render={() => (
@@ -105,7 +97,7 @@ function App(props) {
               )}/>
 
               <Route path="/event/:eventName" render={(routerProps) => (
-              <EventPage {...routerProps} events={events}></EventPage>
+              <EventsIndividualPage {...routerProps} events={events}></EventsIndividualPage>
               )}/>
 
               <Route path="/people-edit" render={() => (
