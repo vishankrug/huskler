@@ -28,7 +28,7 @@ const uiConfig = {
 
 };
 
-function App(props) {
+function App() {
 
 
   // Firebase state
@@ -109,14 +109,6 @@ function App(props) {
 
   }, [])
 
-  //console.log(eventsArray);
-
-    ///// EVENTS: Gets all data from firebase /////
-  
-   
-
-    
-
     ///// Handle interested /////
   function handleInterestedClick (eventTitle)  {
     
@@ -140,9 +132,6 @@ function App(props) {
         const refInterestedPeople = firebase.database().ref("events/" + event.key + "/interestedPeople");
 
         
-        const refPeople =firebase.database().ref("people");
-
-
         refInterestedPeople.push(keyOfCurrentUser);
         refEvents.update({isInterested: !event.isInterested})
         //event.isInterested = !event.isInterested;
