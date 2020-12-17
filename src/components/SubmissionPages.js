@@ -24,7 +24,7 @@ export function EditProfile(props){
         <h1>EDIT PROFILE</h1>
       </div>
 
-      <PeopleForm />
+      <PeopleForm user={props.user} />
       
      
   

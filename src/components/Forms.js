@@ -133,28 +133,45 @@ export function EventsSubmissionForm(){
 export function PeopleForm(){
   let user = firebase.auth().currentUser;
   //let peopleRef = firebase.database.ref("people");
+
+  let fnameUpdate = user.displayName.substr(0, user.displayName.indexOf(' '));
+  let lnameUpdate = user.displayName.substr(user.displayName.indexOf(' ')+1, user.displayName.length);
+
   const initialValues = {
-    name: user.displayName, 
+    fname: fnameUpdate, 
+    lname: lnameUpdate,
     major: "",
     interest: "",
     year: "",
-    email: user.emailVerified,
+    email: user.email,
     bio: ""
   }
 
   const handleSubmit = (values) => {
     let databasePeopleRef = firebase.database().ref('people');
-    databasePeopleRef.set(
+    databasePeopleRef.push(
       {
-        name: values.name,
+        displayName: user.displayName,
+        fname: values.fname,
+        lname: values.lname,
         major: values.major,
         interest: values.interest,
         year: values.year,
+        email: user.email,
         bio: values.bio,
-
       }
     );
   }  
+
+  const allInputs = {imgUrl: ""};
+  const [imageAsUrl, setImageAsUrl] = useState(allInputs);
+  const [imageAsFile, setImageAsFile] = useState('');
+
+  const handleImageAsFile = (event) => {
+    const img = event.target.files[0];
+    setImageAsFile((img))
+    
+  }
 
 
   return(
@@ -162,32 +179,53 @@ export function PeopleForm(){
     {() => (
       <Form className="baseForm" noValidate>
         
-        <label className="mt-4">Name</label> <br></br>
+        <label className="mt-4">Display Name</label> <br></br>
         <Field 
           type="text"
-          id="title"
-          name="title"
+          id="displayName"
+          name="displayName"
+          /> <br></br>
+
+      <label className="mt-4">First Name</label> <br></br>
+        <Field 
+          type="text"
+          id="fname"
+          name="fname"
+          /> <br></br>
+
+      <label className="mt-4">Last Name</label> <br></br>
+        <Field 
+          type="text"
+          id="lname"
+          name="lname"
           /> <br></br>
 
         <label className="mt-4">Major</label> <br></br>
         <Field 
           type="text"
-          id="hostedBy"
-          name="hostedBy"
+          id="major"
+          name="major"
           /> <br></br>
 
-        <label className="mt-4">Year</label> <br></br>
+        <label className="mt-4">Class Standing</label> <br></br>
         <Field
           type="text"
-          id="date"
-          name="date"
+          id="year"
+          name="year"
           /> <br></br>
 
         <label className="mt-4">Interest</label> <br></br>
         <Field 
           type="text"
-          id="time"
-          name="time"
+          id="interest"
+          name="interest"
+          /> <br></br>
+
+        <label className="mt-4">Email</label> <br></br>
+        <Field 
+          type="text"
+          id="email"
+          name="email"
           /> <br></br>
 
         <label className="mt-4">Bio</label> <br></br>
@@ -197,6 +235,9 @@ export function PeopleForm(){
           rows="4"
           cols="50"
           /> <br></br>
+
+        <label className="mt-4">Upload an image</label> <br></br>
+          <input type="file" id="image" name="image" onChange={handleImageAsFile}/><br></br>
 
         <Button type="submit">Submit</Button>
         <BackButton/>

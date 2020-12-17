@@ -8,6 +8,7 @@ import { SearchBarEvent } from './Search.js';
 import firebase from 'firebase';
 
 
+<<<<<<< HEAD
 
 export function EventsMainPage(){
   let content ='';
@@ -39,6 +40,10 @@ export function EventsList(){
   //let events = props.events;
 
 
+=======
+export function EventsList(props){
+  let interestedCallback = props.interestedCallback;
+>>>>>>> 75a4f2b797a81e747864710bcf304220e6f00b59
 
   const [eventNameState, setEventNameSearch] = useState('');
   const [hostedByState, setHostedBySearch] = useState('');
@@ -73,8 +78,9 @@ export function EventsList(){
   }, [])
 
   
+  
 
-  console.log(interestedEventsFull);
+ // console.log(interestedEventsFull);
 
   ///// Handle interested /////
   const handleInterestedClick = (eventTitle) => {

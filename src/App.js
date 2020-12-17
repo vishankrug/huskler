@@ -36,15 +36,32 @@ function App(props) {
   const[user, setUser] = useState(undefined);
   const [isLoading, setIsLoading] = useState(true);
  
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 75a4f2b797a81e747864710bcf304220e6f00b59
   //auth state event listener
   useEffect( () => { //run after component loads
     //listen to the the authentication state
     const authUnregisterFunction = firebase.auth().onAuthStateChanged((firebaseUser) =>{
       if(firebaseUser){
-        console.log("logged in as: " + firebaseUser.displayName)
         setUser(firebaseUser)
         setIsLoading(false);
+        /*
+        let fnameUpdate = user.displayName.substr(0, user.displayName.indexOf(' '));
+        let lnameUpdate = user.displayName.substr(user.displayName.indexOf(' ')+1, user.displayName.length);
+        const newPerson = {
+          fname: fnameUpdate,
+          lname: lnameUpdate,
+          major: "-",
+          interest: "-",
+          year: "-",
+          email: user.email,
+          bio: "-"
+        }
+        firebase.database().ref('people').push(newPerson);
+        */
       }else{ //not defined, logged out
         setUser(null)
       }
@@ -107,7 +124,7 @@ function App(props) {
               <Route path="/people/:fullname" render={(routerProps) => (
               <PeopleDetails {...routerProps} people={people}></PeopleDetails>
               )}/>
-
+              
               <Redirect to="/" />
             </Switch>
           </div>
