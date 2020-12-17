@@ -40,7 +40,6 @@ export function PeopleList(props){
     })
   }, [])
 
-
   //filter the results by search
   let filteredPeople = peopleArray.filter((person) => {
     return (person.fname.toLowerCase().indexOf(nameState.toLowerCase()) !== -1 || person.lname.toLowerCase().indexOf(nameState.toLowerCase())!== -1) || ((person.fname.toLowerCase()+ " " + person.lname.toLowerCase()).indexOf(nameState.toLowerCase()) !== -1);
@@ -85,6 +84,7 @@ export function PeopleList(props){
   //grabbing text before and after space
   let fnameUpdate = props.user.displayName.substr(0, props.user.displayName.indexOf(' '));
   let lnameUpdate = props.user.displayName.substr(props.user.displayName.indexOf(' ')+1, props.user.displayName.length);
+
 
 /*
   if(peopleEmails.indexOf(props.user.email) == -1) {

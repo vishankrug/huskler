@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Formik, Form, Field} from 'formik';
 import firebase from 'firebase';
 
@@ -131,33 +131,59 @@ export function PeopleForm(){
   let user = firebase.auth().currentUser;
   //let peopleRef = firebase.database.ref("people");
 
+  const [peopleArray, setPeople] = useState([]);
+
+  useEffect(() => {
+    const peopleRef = firebase.database().ref("people");
+    peopleRef.on("value", (snapshot) => {
+      const peopleObjects = snapshot.val();
+      let peopleKeyArray = Object.keys(peopleObjects);
+      let peopleArray = peopleKeyArray.map((key) => {
+        let singlePeopleObject = peopleObjects[key];
+        singlePeopleObject.key = key;
+        
+        return singlePeopleObject;
+      })
+      setPeople(peopleArray);
+    })
+  }, [])
+
+  let keyOfCurrentUser;
+
+  for(let i = 0; i < peopleArray.length; i++) {
+    if(peopleArray[i].email == user.email){
+      keyOfCurrentUser = peopleArray[i].key;
+    }
+  }
+
   let fnameUpdate = user.displayName.substr(0, user.displayName.indexOf(' '));
   let lnameUpdate = user.displayName.substr(user.displayName.indexOf(' ')+1, user.displayName.length);
 
   const initialValues = {
     fname: fnameUpdate, 
     lname: lnameUpdate,
-    major: "",
-    interest: "",
-    year: "",
+    major: user.major,
+    interest: user.interest,
+    year: user.year,
     email: user.email,
-    bio: ""
+    bio: user.bio,
+    image: user.image
   }
 
-  const handleSubmit = (values) => {
-    let databasePeopleRef = firebase.database().ref('people');
-    databasePeopleRef.push(
-      {
-        displayName: user.displayName,
-        fname: values.fname,
-        lname: values.lname,
+  const onSubmit = (values) => {
+
+    const updatePerson = {
+        fname: fnameUpdate,
+        lname: lnameUpdate,
         major: values.major,
         interest: values.interest,
         year: values.year,
         email: user.email,
         bio: values.bio,
-      }
-    );
+        image: imageAsFile.name
+      
+    }
+    firebase.database().ref('people/'+keyOfCurrentUser).update(updatePerson);
   }  
 
   const allInputs = {imgUrl: ""};
@@ -172,16 +198,9 @@ export function PeopleForm(){
 
 
   return(
-    <Formik {...{initialValues, handleSubmit}}>
+    <Formik {...{initialValues, onSubmit}}>
     {() => (
       <Form className="baseForm" noValidate>
-        
-        <label className="mt-4">Display Name</label> <br></br>
-        <Field 
-          type="text"
-          id="displayName"
-          name="displayName"
-          /> <br></br>
 
       <label className="mt-4">First Name</label> <br></br>
         <Field 
@@ -226,12 +245,12 @@ export function PeopleForm(){
           /> <br></br>
 
         <label className="mt-4">Bio</label> <br></br>
-        <textarea
-          id="location"
-          name="location"
-          rows="4"
-          cols="50"
+        <Field 
+          type="text"
+          id="bio"
+          name="bio"
           /> <br></br>
+
 
         <label className="mt-4">Upload an image</label> <br></br>
           <input type="file" id="image" name="image" onChange={handleImageAsFile}/><br></br>
