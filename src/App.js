@@ -113,10 +113,7 @@ function App(props) {
 
   }, [])
 
-<<<<<<< HEAD
-=======
   //console.log(eventsArray);
->>>>>>> 82b02c485847c52d42b3d07bd9ff0572eabe2117
 
     ///// EVENTS: Gets all data from firebase /////
   
