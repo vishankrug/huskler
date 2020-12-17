@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 
 import App from './App.js';
 import {BrowserRouter} from 'react-router-dom'
-import SAMPLE_PEOPLE from './people.json'
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
@@ -28,7 +27,7 @@ var firebaseConfig = {
 
 ReactDOM.render(
   <BrowserRouter>
-    <App  people={SAMPLE_PEOPLE}/>
+    <App/>
   </BrowserRouter>,
   document.getElementById('root')
 );
