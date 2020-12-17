@@ -135,7 +135,6 @@ export function PeopleForm(props){
   //let peopleRef = firebase.database.ref("people");
 
   let keyOfCurrentUser;
-  console.log(props);
 
   for(let i = 0; i < props.peopleArray.length; i++) {
     if(props.peopleArray[i].email === user.email){

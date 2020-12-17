@@ -7,6 +7,7 @@ import {PeopleList, PeopleDetails} from './components/People.js'
 import firebase from 'firebase';
 import { LandingPage } from './components/LandingPage.js';
 import {EventSubmission, EditProfile} from './components/SubmissionPages.js';
+//import 'font-awesome/css/font-awesome.css';
 
 
 const uiConfig = {
@@ -39,8 +40,21 @@ function App(props) {
     //listen to the the authentication state
     const authUnregisterFunction = firebase.auth().onAuthStateChanged((firebaseUser) =>{
       if(firebaseUser){
-        setUser(firebaseUser)
+        setUser(firebaseUser);
         setIsLoading(false);
+        if(user && user.metadata.creationTime === user.metadata.lastSignInTime) {
+          const newPerson = {
+            fname: user.displayName.substr(0, user.displayName.indexOf(' ')),
+            lname: user.displayName.substr(user.displayName.indexOf(' ')+1, user.displayName.length),
+            major: "-",
+            interest: "-",
+            year: "-",
+            email: user.email,
+            bio: "-",
+            image: "-"
+          }
+          firebase.database().ref('people').push(newPerson);
+        }
       }else{ //not defined, logged out
         setUser(null)
       }
@@ -51,37 +65,38 @@ function App(props) {
     }
   }, []) //only run hook on first load
 
-  /*if(isLoading){
-    return(
-    <div className="text-center">
-      <i className="fa fa-spinner fa-spin fa-3x"></i>
-    </div>
-    ) 
-  }*/
-
   const [peopleArray, setPeople] = useState([]);
-  const [peopleEmails, setEmails] = useState([])
+
 
   useEffect(() => {
     const peopleRef = firebase.database().ref("people");
     peopleRef.on("value", (snapshot) => {
       const peopleObjects = snapshot.val();
       let peopleKeyArray = Object.keys(peopleObjects);
+      console.log()
       let peopleArray = peopleKeyArray.map((key) => {
         let singlePeopleObject = peopleObjects[key];
         singlePeopleObject.key = key;
         
         return singlePeopleObject;
       })
-      let peopleEmails = peopleArray.map((key) => {
-        return key.email;
-      })
       setPeople(peopleArray);
-      setEmails(peopleEmails);
+    
     })
   }, [])
   
   let content = null;
+
+  /*
+  if(isLoading){
+    return(
+    <div className="text-center">
+      <i className="fa fa-spinner fa-spin fa-3x"></i>
+    </div>
+    ) 
+  }
+*/
+
 
   //Log in page
   if(!user){

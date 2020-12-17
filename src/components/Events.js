@@ -46,10 +46,6 @@ export function EventsList(){
   const [interestedEventsFull, setInterested] = useState(eventsArray);
 
 
-<<<<<<< HEAD
-  //console.log(firebase.database().ref("events"));
-=======
->>>>>>> 5610157f7ad09a6ee87c066e7d273ae4dae11860
 
   ///// Gets all data from firebase /////
   
@@ -78,7 +74,6 @@ export function EventsList(){
   
   
 
-  console.log(interestedEventsFull);
 
   ///// Handle interested /////
   const handleInterestedClick = (eventTitle) => {
