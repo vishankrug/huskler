@@ -27,7 +27,7 @@ const uiConfig = {
 
 };
 
-function App(props) {
+function App() {
 
 
   // Firebase state
@@ -180,7 +180,7 @@ function App(props) {
               )} />
 
               <Route exact path="/" render={(routerProps) => (
-              <EventsMainPage {...routerProps} events={interestedEventsFull} adoptHandleInterestedClick={handleInterestedClick}  ></EventsMainPage>
+              <EventsMainPage {...routerProps} events={eventsArray} adoptHandleInterestedClick={handleInterestedClick}  ></EventsMainPage>
             )} />
 
               <Route path="/submit-event" render={() => (

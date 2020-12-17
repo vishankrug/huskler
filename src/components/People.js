@@ -32,7 +32,7 @@ export function PeopleList(props){
 
   if(interestsState !== ''){
     filteredPeople = filteredPeople.filter((person) => {
-      return (person.interests.toLowerCase().indexOf(interestsState.toLowerCase()) !== -1);
+      return (person.interest.toLowerCase().indexOf(interestsState.toLowerCase()) !== -1);
     });
   }
 
