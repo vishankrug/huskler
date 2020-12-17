@@ -41,7 +41,6 @@ function App(props) {
     const authUnregisterFunction = firebase.auth().onAuthStateChanged((firebaseUser) =>{
       if(firebaseUser){
         setUser(firebaseUser);
-        console.log(firebaseUser);
         setIsLoading(false);
         if(firebaseUser && firebaseUser.metadata.creationTime === firebaseUser.metadata.lastSignInTime) {
           const newPerson = {

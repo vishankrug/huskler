@@ -15,6 +15,8 @@ import {BackButton} from './Buttons'
 export function EventsSubmissionForm(props){
 
   let user = firebase.auth().currentUser;
+  //let peopleRef = firebase.database.ref("people");
+
   let keyOfCurrentUser;
 
   for(let i = 0; i < props.peopleArray.length; i++) {
@@ -22,6 +24,8 @@ export function EventsSubmissionForm(props){
       keyOfCurrentUser = props.peopleArray[i].key;
     }
   }
+
+  console.log(keyOfCurrentUser);
 
   const initialValues = {
     titlea: '', 
@@ -38,7 +42,7 @@ export function EventsSubmissionForm(props){
 
   const onSubmit = (values) =>{
     let databaseRef = firebase.database().ref('events');
-   
+    console.log("Hello");
 
     databaseRef.push(
       {
@@ -103,9 +107,10 @@ export function EventsSubmissionForm(props){
             type="textarea"
             id="description"
             name="description"
+            className="mb-5"
             /> <br></br>
           
-          <Button type="submit" className="mt-5">Submit</Button>
+          <Button type="submit">Submit</Button>
           <BackButton/>
 
         </Form>
@@ -120,12 +125,15 @@ export function PeopleForm(props){
   //let peopleRef = firebase.database.ref("people");
 
   let keyOfCurrentUser;
+  
 
   for(let i = 0; i < props.peopleArray.length; i++) {
     if(props.peopleArray[i].email === user.email){
       keyOfCurrentUser = props.peopleArray[i].key;
     }
   }
+
+  
 
   let fnameUpdate = user.displayName.substr(0, user.displayName.indexOf(' '));
   let lnameUpdate = user.displayName.substr(user.displayName.indexOf(' ')+1, user.displayName.length);
