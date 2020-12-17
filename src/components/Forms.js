@@ -12,7 +12,16 @@ import {BackButton} from './Buttons'
 
 
 
-export function EventsSubmissionForm(){
+export function EventsSubmissionForm(props){
+
+  let user = firebase.auth().currentUser;
+  let keyOfCurrentUser;
+
+  for(let i = 0; i < props.peopleArray.length; i++) {
+    if(props.peopleArray[i].email === user.email){
+      keyOfCurrentUser = props.peopleArray[i].key;
+    }
+  }
 
   const initialValues = {
     titlea: '', 
@@ -23,6 +32,7 @@ export function EventsSubmissionForm(){
     description: '', 
     image: '',
     isInterested: '',
+    interestedPeople: [],
   }
 
 
@@ -40,7 +50,7 @@ export function EventsSubmissionForm(){
         description: values.description,
         image: 'temp-background.jpg',
         isInterested: false,
-        interestedPeople: [],
+        interestedPeople: [keyOfCurrentUser],
         
       }
     );
@@ -129,6 +139,7 @@ export function PeopleForm(props){
     email: user.email,
     bio: user.bio,
     image: user.image
+    
   }
 
   const onSubmit = (values) => {
