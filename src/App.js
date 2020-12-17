@@ -113,6 +113,10 @@ function App(props) {
 
   }, [])
 
+<<<<<<< HEAD
+=======
+  //console.log(eventsArray);
+>>>>>>> 82b02c485847c52d42b3d07bd9ff0572eabe2117
 
     ///// EVENTS: Gets all data from firebase /////
   
@@ -123,7 +127,7 @@ function App(props) {
     ///// Handle interested /////
   function handleInterestedClick (eventTitle)  {
     
-    let user = firebase.auth().currentUser;
+    let user = firebase.auth().currentUser.email;
     
 
 
@@ -133,9 +137,13 @@ function App(props) {
       //console.log("Event Title: " + eventTitle);
       //console.log(typeof event.key);
       if(event.title === eventTitle){
-        const ref = firebase.database().ref("events").child(event.key);
-        ref.update({isInterested: !event.isInterested})
-        event.isInterested = !event.isInterested;
+        const refEvents = firebase.database().ref("events").child(event.key);
+        const refPeople =firebase.database().ref("people");
+
+
+
+        //refEvents.update({isInterested: !event.isInterested})
+        //event.isInterested = !event.isInterested;
       }
       return event;
     })
@@ -188,7 +196,7 @@ function App(props) {
             )} />
 
               <Route path="/submit-event" render={() => (
-              <EventSubmission />
+              <EventSubmission peopleArray = {peopleArray} />
               )}/>
 
               <Route path="/event/:eventName" render={(routerProps) => (
