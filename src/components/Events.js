@@ -9,8 +9,16 @@ import firebase from 'firebase';
 
 
 
-export function EventsMainPage(){
+export function EventsMainPage(props){
+
+  let adoptHandleInterestedClick = props.adoptHandleInterestedClick;
+  let eventsArray = props.events;
+  
+  
   let content ='';
+ 
+
+  
   
   if(firebase.database().ref("events") === null ){
     content = 
@@ -24,7 +32,7 @@ export function EventsMainPage(){
 
     
   }else{
-   content = <EventsList />;
+   content = <EventsList eventsArray={eventsArray} adoptHandleInterestedClick={adoptHandleInterestedClick}/>;
   }
 
   return(
@@ -32,82 +40,22 @@ export function EventsMainPage(){
   )
 }
 
-export function EventsList(){
-
- 
-
-  //let events = props.events;
-
-
+export function EventsList(props){
 
   const [eventNameState, setEventNameSearch] = useState('');
   const [hostedByState, setHostedBySearch] = useState('');
-  const [eventsArray, setEvents] = useState([]); //array
-  const [interestedEventsFull, setInterested] = useState(eventsArray);
-
-
-<<<<<<< HEAD
-  //console.log(firebase.database().ref("events"));
-=======
->>>>>>> 5610157f7ad09a6ee87c066e7d273ae4dae11860
-
-  ///// Gets all data from firebase /////
+  let eventsArray = props.eventsArray;
   
-  useEffect(() => {
-    const eventRef = firebase.database().ref("events");
-    if(eventRef === null){
-      console.log("There's nothing here");
-    }else{
-      eventRef.on("value", (snapshot) => {
-        const eventsObject = snapshot.val() //converts to JS value
-        let objectKeyArray = Object.keys(eventsObject);
-        let eventsArray = objectKeyArray.map((key) => {
-          let singleEventObject = eventsObject[key];
-          singleEventObject.key = key;
-          
+  let adoptHandleInterestedClick = props.adoptHandleInterestedClick;
   
-          return singleEventObject;
-        })
-        setEvents(eventsArray);
-        setInterested(eventsArray);
-      })
-    }
-    
-  }, [])
-
-  
-  
-
-  console.log(interestedEventsFull);
-
-  ///// Handle interested /////
-  const handleInterestedClick = (eventTitle) => {
-
-    
-  
-    const interestedEvents = eventsArray.map((event) => {
-      //console.log("Props Title: " + event.title);
-      //console.log("Event Title: " + eventTitle)
-      console.log(typeof event.key);
-      if(event.title === eventTitle){
-        const ref = firebase.database().ref("events").child(event.key);
-        ref.update({isInterested: !event.isInterested})
-        event.isInterested = !event.isInterested;
-      }
-      return event;
-    })
-    
-    setInterested(interestedEvents);
-  }
-
  
   ////// Search function /////
-  let filteredEvents = interestedEventsFull.filter((event) => {
+  let filteredEvents = eventsArray.filter((event) => {
     return (event.title.toLowerCase().indexOf(eventNameState.toLowerCase()) !== -1);
   });
 
   if(hostedByState !== ''){
-    filteredEvents = interestedEventsFull.filter((event) => {
+    filteredEvents = eventsArray.filter((event) => {
       return (event.hostedBy.toLowerCase().indexOf(hostedByState.toLowerCase()) !== -1);
     })
   }
@@ -126,7 +74,7 @@ export function EventsList(){
   }
 
   let eventCards = filteredEvents.map((eventsArray) => {
-    return <EventCard key={eventsArray.title} event={eventsArray} adoptInterestedCallback={() => handleInterestedClick(eventsArray.title)} />
+    return <EventCard key={eventsArray.title} event={eventsArray} adoptHandleInterestedClick={adoptHandleInterestedClick} />
   })
  
   ///// Return /////
@@ -147,8 +95,11 @@ export function EventsList(){
 
 //////// EVENT CARD /////////
 export function EventCard(props) {
-  let interestedCallback = props.adoptInterestedCallback;
+  
   let event = props.event;
+  let title = event.title;
+  let adoptHandleInterestedClick = props.adoptHandleInterestedClick;
+
 
   const[redirectTo, setRedirectTo] = useState(undefined);
 
@@ -183,8 +134,8 @@ export function EventCard(props) {
 
         </CardBody>
         <CardFooter> 
-          <Button onClick={() => interestedCallback(event.name)}>Interested</Button>
-          <p> {event.isInterested ? "You are interested in this event!" : "no" }</p>
+          <Button onClick={ () => adoptHandleInterestedClick(event.title)}>Interested</Button>
+          <p> {event.isInterested ? "You are interested in this event!" : <br></br> }</p>
         </CardFooter>
       </Card>
 

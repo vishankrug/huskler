@@ -52,6 +52,7 @@ export function EventsSubmissionForm(){
         description: values.description,
         image: imageAsFile.name,
         isInterested: false,
+        interestedPeople: [],
         
       }
     );
