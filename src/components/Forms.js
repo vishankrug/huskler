@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {Formik, Form, Field} from 'formik';
 import firebase from 'firebase';
 
@@ -6,7 +6,7 @@ import 'firebase/database';
 import 'firebase/auth';
 import {Button} from 'reactstrap';
 import {BackButton} from './Buttons'
-import { faLeaf } from '@fortawesome/free-solid-svg-icons';
+//import { faLeaf } from '@fortawesome/free-solid-svg-icons';
 //import { DatePicker } from 'react-datepicker';
 //import FileUploader from 'react-firebase-file-uploader';
 
@@ -138,7 +138,7 @@ export function PeopleForm(props){
   console.log(props);
 
   for(let i = 0; i < props.peopleArray.length; i++) {
-    if(props.peopleArray[i].email == user.email){
+    if(props.peopleArray[i].email === user.email){
       keyOfCurrentUser = props.peopleArray[i].key;
     }
   }

@@ -80,7 +80,6 @@ function App(props) {
       setEmails(peopleEmails);
     })
   }, [])
-  console.log(peopleArray)
   
   let content = null;
 

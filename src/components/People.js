@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {Card, CardText, CardBody,CardLink, CardTitle, Col, Row} from 'reactstrap';
 import { Redirect } from 'react-router-dom';
 import _ from 'lodash';
 import { useParams } from "react-router-dom";
 import {BackButton} from './Buttons.js';
-import firebase from 'firebase';
+import 'firebase';
 import 'firebase/database';
 import { SearchBarPage } from './Search.js';
 import 'firebase/auth';
@@ -61,8 +61,8 @@ export function PeopleList(props){
   })
 
   //grabbing text before and after space
-  let fnameUpdate = props.user.displayName.substr(0, props.user.displayName.indexOf(' '));
-  let lnameUpdate = props.user.displayName.substr(props.user.displayName.indexOf(' ')+1, props.user.displayName.length);
+  //let fnameUpdate = props.user.displayName.substr(0, props.user.displayName.indexOf(' '));
+  //let lnameUpdate = props.user.displayName.substr(props.user.displayName.indexOf(' ')+1, props.user.displayName.length);
 
 
 /*
@@ -116,7 +116,7 @@ export function PeopleCard(props) {
             <CardTitle tag="h3" className="name text-center">{people.fname + " " + people.lname}</CardTitle>
             <CardText className="card-info">{"Major: " + people.major}</CardText>
             <CardText className="card-info">{"Interests: " + people.interest}</CardText>
-            <CardLink>Click to learn more!</CardLink>
+            <CardLink href="">Click to learn more!</CardLink>
           </CardBody>
         </Card>
   
