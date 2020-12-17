@@ -1,6 +1,6 @@
 import {Formik, Form, Field} from 'formik';
 import firebase from 'firebase';
-
+import {Link} from 'react-router-dom';
 import 'firebase/database';
 import 'firebase/auth';
 import {Button} from 'reactstrap';
@@ -103,8 +103,9 @@ export function EventsSubmissionForm(props){
             id="description"
             name="description"
             /> <br></br>
-          
+          <Link to="/">
           <Button type="submit" className="mt-5">Submit</Button>
+          </Link>
           <BackButton/>
 
         </Form>
@@ -132,12 +133,12 @@ export function PeopleForm(props){
   const initialValues = {
     fname: fnameUpdate, 
     lname: lnameUpdate,
-    major: user.major,
-    interest: user.interest,
-    year: user.year,
+    major: '',
+    interest: '',
+    year: '',
     email: user.email,
-    bio: user.bio,
-    image: user.image
+    bio: '',
+    image: ''
     
   }
 
@@ -211,8 +212,7 @@ export function PeopleForm(props){
           id="bio"
           name="bio"
           /> <br></br>
-
-        <Button type="submit">Submit</Button>
+          <Button type="submit">Submit</Button>
         <BackButton/>
       </Form>
     )}
