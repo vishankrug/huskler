@@ -27,9 +27,6 @@ const uiConfig = {
 
 function App(props) {
 
-  const events = props.events;
-  const people = props.people;
-
 
   // Firebase state
 
@@ -44,20 +41,6 @@ function App(props) {
       if(firebaseUser){
         setUser(firebaseUser)
         setIsLoading(false);
-        /*
-        let fnameUpdate = user.displayName.substr(0, user.displayName.indexOf(' '));
-        let lnameUpdate = user.displayName.substr(user.displayName.indexOf(' ')+1, user.displayName.length);
-        const newPerson = {
-          fname: fnameUpdate,
-          lname: lnameUpdate,
-          major: "-",
-          interest: "-",
-          year: "-",
-          email: user.email,
-          bio: "-"
-        }
-        firebase.database().ref('people').push(newPerson);
-        */
       }else{ //not defined, logged out
         setUser(null)
       }
@@ -76,6 +59,27 @@ function App(props) {
     ) 
   }*/
 
+  const [peopleArray, setPeople] = useState([]);
+  const [peopleEmails, setEmails] = useState([])
+
+  useEffect(() => {
+    const peopleRef = firebase.database().ref("people");
+    peopleRef.on("value", (snapshot) => {
+      const peopleObjects = snapshot.val();
+      let peopleKeyArray = Object.keys(peopleObjects);
+      let peopleArray = peopleKeyArray.map((key) => {
+        let singlePeopleObject = peopleObjects[key];
+        singlePeopleObject.key = key;
+        
+        return singlePeopleObject;
+      })
+      let peopleEmails = peopleArray.map((key) => {
+        return key.email;
+      })
+      setPeople(peopleArray);
+      setEmails(peopleEmails);
+    })
+  }, [])
   
   let content = null;
 
@@ -98,7 +102,7 @@ function App(props) {
           <div className="container">
             <Switch>
               <Route exact path="/people" render={(routerProps) => (
-              <PeopleList {...routerProps} user={user} people={people}></PeopleList>
+              <PeopleList {...routerProps} user={user} peopleArray={peopleArray} ></PeopleList>
               )} />
 
               <Route exact path="/" render={(routerProps) => (
@@ -110,15 +114,15 @@ function App(props) {
               )}/>
 
               <Route path="/event/:eventName" render={(routerProps) => (
-              <EventsIndividualPage {...routerProps} events={events}></EventsIndividualPage>
+              <EventsIndividualPage {...routerProps} ></EventsIndividualPage>
               )}/>
 
               <Route path="/people-edit" render={() => (
-              <EditProfile user={user} people={people}></EditProfile>
+              <EditProfile user={user} peopleArray={peopleArray}></EditProfile>
               )}/>
 
               <Route path="/people/:fullname" render={(routerProps) => (
-              <PeopleDetails {...routerProps} people={people}></PeopleDetails>
+              <PeopleDetails {...routerProps} peopleArray={peopleArray}></PeopleDetails>
               )}/>
               
               <Redirect to="/" />
