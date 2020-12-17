@@ -42,7 +42,7 @@ function App(props) {
       if(firebaseUser){
         setUser(firebaseUser);
         setIsLoading(false);
-        if(firebaseUser.metadata.creationTime === firebaseUser.metadata.lastSignInTime) {
+        if(firebaseUser && firebaseUser.metadata.creationTime === firebaseUser.metadata.lastSignInTime) {
           const newPerson = {
             fname: user.displayName.substr(0, user.displayName.indexOf(' ')),
             lname: user.displayName.substr(user.displayName.indexOf(' ')+1, user.displayName.length),
@@ -51,7 +51,7 @@ function App(props) {
             year: "-",
             email: user.email,
             bio: "-",
-            image: "-"
+            image: "images/avatar.png"
           }
           firebase.database().ref('people').push(newPerson);
         }

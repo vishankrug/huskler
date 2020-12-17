@@ -18,7 +18,6 @@ export function EventSubmission(){
 }
 
 export function EditProfile(props){
-  console.log(props.peopleArray);
   return(
     <main>
       <div className="d-flex justify-content-center mt-5">
