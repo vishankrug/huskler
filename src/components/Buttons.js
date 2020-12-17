@@ -26,7 +26,7 @@ export function SubmitEventButton(){
   return(
     <div className="d-flex justify-content-end">
       <Link to="/submit-event">
-        <Button className="mt-4 " >Submit Event</Button>
+        <Button className="mt-4 purple-button" >Submit Event</Button>
       </Link>
     </div>
     
