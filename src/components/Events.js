@@ -12,7 +12,7 @@ import firebase from 'firebase';
 export function EventsMainPage(){
   let content ='';
   
-  if(firebase.database().ref("events") === null){
+  if(firebase.database().ref("events") === null ){
     content = 
       <div>
         <SubmitEventButton />
@@ -46,7 +46,7 @@ export function EventsList(){
   const [interestedEventsFull, setInterested] = useState(eventsArray);
 
 
-  console.log(firebase.database().ref("events"));
+  //console.log(firebase.database().ref("events"));
 
   ///// Gets all data from firebase /////
   
@@ -61,7 +61,7 @@ export function EventsList(){
         let eventsArray = objectKeyArray.map((key) => {
           let singleEventObject = eventsObject[key];
           singleEventObject.key = key;
-          singleEventObject.isInterested = false;
+          
   
           return singleEventObject;
         })
@@ -75,7 +75,7 @@ export function EventsList(){
   
   
 
- // console.log(interestedEventsFull);
+  console.log(interestedEventsFull);
 
   ///// Handle interested /////
   const handleInterestedClick = (eventTitle) => {
@@ -85,9 +85,10 @@ export function EventsList(){
     const interestedEvents = eventsArray.map((event) => {
       //console.log("Props Title: " + event.title);
       //console.log("Event Title: " + eventTitle)
-      console.log(event.title === eventTitle)
+      console.log(typeof event.key);
       if(event.title === eventTitle){
-       
+        const ref = firebase.database().ref("events").child(event.key);
+        ref.update({isInterested: !event.isInterested})
         event.isInterested = !event.isInterested;
       }
       return event;
@@ -155,6 +156,8 @@ export function EventCard(props) {
   if(redirectTo !== undefined){
     return <Redirect push to={redirectTo}/>
   }
+
+ 
 
   return (
     <Col md="6" className="mt-4">

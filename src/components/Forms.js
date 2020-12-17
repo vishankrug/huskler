@@ -28,7 +28,7 @@ export function EventsSubmissionForm(){
     location: '', 
     description: '', 
     image: '',
-    isInterest: '',
+    isInterested: '',
   }
 
   const handleImageAsFile = (event) => {
