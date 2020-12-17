@@ -41,7 +41,6 @@ function App(props) {
     const authUnregisterFunction = firebase.auth().onAuthStateChanged((firebaseUser) =>{
       if(firebaseUser){
         setUser(firebaseUser);
-        console.log(firebaseUser);
         setIsLoading(false);
         if(firebaseUser && firebaseUser.metadata.creationTime === firebaseUser.metadata.lastSignInTime) {
           const newPerson = {
@@ -87,7 +86,6 @@ function App(props) {
     peopleRef.on("value", (snapshot) => {
       const peopleObjects = snapshot.val();
       let peopleKeyArray = Object.keys(peopleObjects);
-      console.log()
       let peopleArray = peopleKeyArray.map((key) => {
         let singlePeopleObject = peopleObjects[key];
         singlePeopleObject.key = key;
@@ -115,7 +113,6 @@ function App(props) {
 
   }, [])
 
-  console.log(eventsArray);
 
     ///// EVENTS: Gets all data from firebase /////
   
