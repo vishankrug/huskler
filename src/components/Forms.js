@@ -95,6 +95,7 @@ export function EventsSubmissionForm(){
             /> <br></br>
           
           <Button type="submit" className="mt-5">Submit</Button>
+          <BackButton/>
 
         </Form>
       )}
