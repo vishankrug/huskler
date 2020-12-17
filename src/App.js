@@ -27,19 +27,13 @@ const uiConfig = {
 
 function App(props) {
 
-  const events = props.events;
-  const people = props.people;
-
 
   // Firebase state
 
   const[user, setUser] = useState(undefined);
   const [isLoading, setIsLoading] = useState(true);
  
-<<<<<<< HEAD
-=======
   
->>>>>>> dff1581f51453589ca89ed90238d052d02a2506f
   //auth state event listener
   useEffect( () => { //run after component loads
     //listen to the the authentication state
@@ -101,7 +95,7 @@ function App(props) {
           <div className="container">
             <Switch>
               <Route exact path="/people" render={(routerProps) => (
-              <PeopleList {...routerProps} user={user} people={people}></PeopleList>
+              <PeopleList {...routerProps} user={user} ></PeopleList>
               )} />
 
               <Route exact path="/" render={(routerProps) => (
@@ -113,15 +107,15 @@ function App(props) {
               )}/>
 
               <Route path="/event/:eventName" render={(routerProps) => (
-              <EventsIndividualPage {...routerProps} events={events}></EventsIndividualPage>
+              <EventsIndividualPage {...routerProps} ></EventsIndividualPage>
               )}/>
 
               <Route path="/people-edit" render={() => (
-              <EditProfile user={user} people={people}></EditProfile>
+              <EditProfile user={user} ></EditProfile>
               )}/>
 
               <Route path="/people/:fullname" render={(routerProps) => (
-              <PeopleDetails {...routerProps} people={people}></PeopleDetails>
+              <PeopleDetails {...routerProps}></PeopleDetails>
               )}/>
               
               <Redirect to="/" />

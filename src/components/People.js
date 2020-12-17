@@ -148,7 +148,7 @@ export function PeopleCard(props) {
   export function PeopleDetails(props){
     let fullname = useParams().fullname;
     let person =  _.find(props.people, {fname:fullname});
-
+    console.log(person);
     return(
       <div>
         <img className="people_image" src={"../"+person.image}  alt={"an image for " + person.fname + " "+ person.lname}/>
