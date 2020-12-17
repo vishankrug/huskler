@@ -6,7 +6,7 @@ import { BackButton, SubmitEventButton } from './Buttons.js';
 import { Button } from 'reactstrap';
 import { SearchBarEvent } from './Search.js';
 import firebase from 'firebase';
-
+import '../CSS/App.css';
 
 
 export function EventsMainPage(props){
@@ -14,12 +14,8 @@ export function EventsMainPage(props){
   let adoptHandleInterestedClick = props.adoptHandleInterestedClick;
   let eventsArray = props.events;
   
-  
   let content ='';
- 
 
-  
-  
   if(firebase.database().ref("events") === null ){
     content = 
       <div>
@@ -28,8 +24,6 @@ export function EventsMainPage(props){
           <h2>There are currently no events at this time. Please check again later!</h2>;
         </div>
       </div>
-     
-
     
   }else{
    content = <EventsList eventsArray={eventsArray} adoptHandleInterestedClick={adoptHandleInterestedClick}/>;
@@ -164,10 +158,16 @@ export function EventsIndividualPage(){
   
   let eventName = useParams().eventName;
   let event = _.find(eventsArray, {title:eventName});
- 
+  let eventLink = '';
   if(!event){
     return <h4>No event that matches</h4>
   }
+  if(event.link = ""){
+    eventLink = "A link to the event was not provided";
+  }else{
+    eventLink = event.link;
+  }
+  
 
   return(
     <div>
@@ -177,9 +177,9 @@ export function EventsIndividualPage(){
       <p><strong>Date: </strong>{event.date}</p>
       <p><strong>Time: </strong>{event.time}</p>
       <p><strong>Location: </strong>{event.location}</p>
-      <p><strong>Link: </strong><a href={event.locationLink}>{event.locationLink}</a></p>
+      <p><strong>Link: </strong>{eventLink}</p>
       <p><strong>Description:</strong> <br></br> {event.description}</p>
-      <Button color="primary" className="btn">Interested!</Button>
+    
       <BackButton />
     </div>
   )

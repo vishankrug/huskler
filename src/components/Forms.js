@@ -1,13 +1,12 @@
 import {Formik, Form, Field} from 'formik';
 import firebase from 'firebase';
-import {Link} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 import 'firebase/database';
 import 'firebase/auth';
 import {Button} from 'reactstrap';
-import {BackButton} from './Buttons'
-//import { faLeaf } from '@fortawesome/free-solid-svg-icons';
-//import { DatePicker } from 'react-datepicker';
-//import FileUploader from 'react-firebase-file-uploader';
+import {BackButton} from './Buttons';
+import {useState} from 'react';
+
 
 
 
@@ -30,13 +29,19 @@ export function EventsSubmissionForm(props){
     hostedBy: '', 
     time:'',
     date: '', 
-    location: '', 
+    location: '',
+    link: '', 
     description: '', 
     image: '',
     isInterested: '',
     interestedPeople: [],
   }
 
+  const [redirectTo, setRedirectTo] = useState(undefined);
+
+  
+
+  
 
   const onSubmit = (values) =>{
     let databaseRef = firebase.database().ref('events');
@@ -48,6 +53,7 @@ export function EventsSubmissionForm(props){
         time: values.time,
         date: values.date,
         location: values.location,
+        link: values.link,
         description: values.description,
         image: 'temp-background.jpg',
         isInterested: false,
@@ -56,6 +62,14 @@ export function EventsSubmissionForm(props){
       }
     );
 
+    ///Redirects user after submit
+    setRedirectTo("/");
+
+  }
+
+
+  if(redirectTo !== undefined){
+    return <Redirect push to={redirectTo} />
   }
 
 
@@ -99,6 +113,13 @@ export function EventsSubmissionForm(props){
             name="location"
             /> <br></br>
 
+          <label className="mt-4">Link to event</label> <br></br>
+          <Field 
+            type="text"
+            id="link"
+            name="link"
+            /> <br></br>
+
           <label className="mt-4">Description</label> <br></br>
           <Field 
             type="textarea"
@@ -106,10 +127,12 @@ export function EventsSubmissionForm(props){
             name="description"
             className="mb-5"
             /> <br></br>
-          <Link to="/">
-          <Button type="submit" className="mt-5">Submit</Button>
-          </Link>
-          <BackButton/>
+         
+
+          <Button type="submit" className="purple-button">Submit</Button>
+      
+         
+         <BackButton/>
 
         </Form>
       )}

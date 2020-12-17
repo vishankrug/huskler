@@ -107,15 +107,7 @@ function App() {
     })
 
   }, [])
-
-
-    ///// EVENTS: Gets all data from firebase /////
-  
-   
-
-    
-
-    ///// Handle interested /////
+  ///// Handle interested /////
   function handleInterestedClick (eventTitle)  {
     
     let user = firebase.auth().currentUser.email;
@@ -133,7 +125,7 @@ function App() {
         const refEvents = firebase.database().ref("events").child(event.key)
         
         const refInterestedPeople = firebase.database().ref("events/" + event.key + "/interestedPeople");
-
+        
         refInterestedPeople.push(keyOfCurrentUser);
         refEvents.update({isInterested: !event.isInterested})
         //event.isInterested = !event.isInterested;
