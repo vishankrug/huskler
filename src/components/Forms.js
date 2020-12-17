@@ -40,6 +40,7 @@ export function EventsSubmissionForm(){
         description: values.description,
         image: 'temp-background.jpg',
         isInterested: false,
+        interestedPeople: [],
         
       }
     );
