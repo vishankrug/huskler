@@ -7,6 +7,8 @@ import {PeopleList, PeopleDetails} from './components/People.js'
 import firebase from 'firebase';
 import { LandingPage } from './components/LandingPage.js';
 import {EventSubmission, EditProfile} from './components/SubmissionPages.js';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 //import 'font-awesome/css/font-awesome.css';
 
 
@@ -33,6 +35,7 @@ function App(props) {
 
   const[user, setUser] = useState(undefined);
   const [isLoading, setIsLoading] = useState(true);
+  let spinnerIcon= <FontAwesomeIcon icon={faSpinner}/>;
  
   
   //auth state event listener
@@ -65,17 +68,11 @@ function App(props) {
     }
   }, []) //only run hook on first load
 
-  /*if(isLoading){
-    return(
-    <div className="text-center">
-      <i className="fa fa-spinner fa-spin fa-3x"></i>
-    </div>
-    ) 
-  }*/
+
 
   const [eventsArray, setEvents] = useState([]); //array
   const [peopleArray, setPeople] = useState([]);
-  //const [interestedEventsFull, setInterested] = useState(eventsArray);
+  const [interestedEventsFull, setInterested] = useState(eventsArray);
   
 
   /////  Gets all data from firebase /////
@@ -107,7 +104,7 @@ function App(props) {
       })
       
       setEvents(array);
-      //setInterested(eventsArray);
+      setInterested(eventsArray);
     })
 
   }, [])
@@ -124,43 +121,50 @@ function App(props) {
   function handleInterestedClick (eventTitle)  {
     
     let user = firebase.auth().currentUser.email;
+
+    let keyOfCurrentUser;
+
+    for(let i = 0; i < peopleArray.length; i++) {
+      if(peopleArray[i].email === user.email){
+        keyOfCurrentUser = peopleArray[i].key;
+      }
+    }
     
-
-
-
     const interestedEvents = eventsArray.map((event) => {
       //console.log("Props Title: " + event.title);
       //console.log("Event Title: " + eventTitle);
       //console.log(typeof event.key);
       if(event.title === eventTitle){
-        const refEvents = firebase.database().ref("events").child(event.key);
+        const refEvents = firebase.database().ref("events").child(event.key)
+        
+        const refInterestedPeople = firebase.database().ref("events/" + event.key + "/interestedPeople");
+
+        
         const refPeople =firebase.database().ref("people");
 
 
-
-        //refEvents.update({isInterested: !event.isInterested})
+        refInterestedPeople.push(keyOfCurrentUser);
+        refEvents.update({isInterested: !event.isInterested})
         //event.isInterested = !event.isInterested;
       }
       return event;
     })
     
-    //setInterested(interestedEvents);
+    setInterested(interestedEvents);
   }
 
   //console.log(interestedEventsFull);
-  
+  console.log(interestedEventsFull);
   
   let content = null;
 
-  /*
   if(isLoading){
     return(
     <div className="text-center">
-      <i className="fa fa-spinner fa-spin fa-3x"></i>
+      {spinnerIcon}
     </div>
     ) 
   }
-*/
 
 
   //Log in page
@@ -188,7 +192,7 @@ function App(props) {
               )} />
 
               <Route exact path="/" render={(routerProps) => (
-              <EventsMainPage {...routerProps} events={eventsArray} adoptHandleInterestedClick={handleInterestedClick}  ></EventsMainPage>
+              <EventsMainPage {...routerProps} events={interestedEventsFull} adoptHandleInterestedClick={handleInterestedClick}  ></EventsMainPage>
             )} />
 
               <Route path="/submit-event" render={() => (
