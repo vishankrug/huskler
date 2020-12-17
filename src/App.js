@@ -42,7 +42,7 @@ function App(props) {
       if(firebaseUser){
         setUser(firebaseUser);
         setIsLoading(false);
-        if(user && user.metadata.creationTime === user.metadata.lastSignInTime) {
+        if(firebaseUser.metadata.creationTime === firebaseUser.metadata.lastSignInTime) {
           const newPerson = {
             fname: user.displayName.substr(0, user.displayName.indexOf(' ')),
             lname: user.displayName.substr(user.displayName.indexOf(' ')+1, user.displayName.length),
