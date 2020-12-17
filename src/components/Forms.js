@@ -140,7 +140,7 @@ export function PeopleForm(props){
         year: values.year,
         email: user.email,
         bio: values.bio,
-        image: user.image
+        image: 'images/avatar.png'
       
     }
     firebase.database().ref('people/'+keyOfCurrentUser).update(updatePerson);
