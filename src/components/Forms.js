@@ -1,4 +1,3 @@
-import React, {useState} from 'react';
 import {Formik, Form, Field} from 'formik';
 import firebase from 'firebase';
 
