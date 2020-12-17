@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React from 'react';
 import '../CSS/App.css';
-import { Switch, Route, Link, Redirect, NavLink, useLocation } from 'react-router-dom';
+import {Link, NavLink, useLocation } from 'react-router-dom';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faHome, faUsers } from '@fortawesome/free-solid-svg-icons';
 import {UserMenuButton} from './Buttons.js';

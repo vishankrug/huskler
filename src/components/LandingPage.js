@@ -1,5 +1,5 @@
 import React from 'react';
-import {UncontrolledCarousel, Container} from 'reactstrap'
+import { Container} from 'reactstrap'
 import firebase from 'firebase';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import '../CSS/App.css'
@@ -27,6 +27,7 @@ export function LandingPage (props){
 }
 
 
+/*
 function LandingPageCarousel(){
   const items = [
     {
@@ -43,3 +44,4 @@ function LandingPageCarousel(){
     <UncontrolledCarousel items={items}/>
   )
 }
+*/

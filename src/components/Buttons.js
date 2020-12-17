@@ -5,7 +5,7 @@ import firebase from 'firebase/app';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import '../CSS/App.css'
-import { EventSubmission } from './Events';
+
 
 
 
@@ -79,7 +79,7 @@ export function UserMenuButton(){
     </Dropdown>
   )
 }
-
+/*
 export function InterestedButton(props){
   let eventID = props.eventID;
 
@@ -93,3 +93,4 @@ export function InterestedButton(props){
     <Button onClick={handleClick} />
   )
 }
+*/

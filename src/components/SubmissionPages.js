@@ -1,5 +1,6 @@
+import React from 'react';
 import {EventsSubmissionForm, PeopleForm} from './Forms'
-export function EventSubmission(props){
+export function EventSubmission(){
 
   return(
     <main>
