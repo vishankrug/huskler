@@ -8,42 +8,8 @@ import { SearchBarEvent } from './Search.js';
 import firebase from 'firebase';
 
 
-<<<<<<< HEAD
-
-export function EventsMainPage(){
-  let content ='';
-  
-  if(firebase.database().ref("events") === null){
-    content = 
-      <div>
-        <SubmitEventButton />
-        <div className="mt-5">
-          <h2>There are currently no events at this time. Please check again later!</h2>;
-        </div>
-      </div>
-     
-
-    
-  }else{
-   content = <EventsList />;
-  }
-
-  return(
-   content
-  )
-}
-
-export function EventsList(){
-
- 
-
-  //let events = props.events;
-
-
-=======
 export function EventsList(props){
   let interestedCallback = props.interestedCallback;
->>>>>>> 75a4f2b797a81e747864710bcf304220e6f00b59
 
   const [eventNameState, setEventNameSearch] = useState('');
   const [hostedByState, setHostedBySearch] = useState('');
