@@ -13,35 +13,14 @@ import 'firebase/auth';
 
 
 export function PeopleList(props){
-  let people = props.people;
   //search states
   const [nameState, setNameSearch] = useState('');
   const [majorState, setMajorSearch] = useState('');
   const [interestsState, setInterestsSearch] = useState('');
-  const [peopleArray, setPeople] = useState([]);
-  const [peopleEmails, setEmails] = useState([])
 
-  useEffect(() => {
-    const peopleRef = firebase.database().ref("people");
-    peopleRef.on("value", (snapshot) => {
-      const peopleObjects = snapshot.val();
-      let peopleKeyArray = Object.keys(peopleObjects);
-      let peopleArray = peopleKeyArray.map((key) => {
-        let singlePeopleObject = peopleObjects[key];
-        singlePeopleObject.key = key;
-        
-        return singlePeopleObject;
-      })
-      let peopleEmails = peopleArray.map((key) => {
-        return key.email;
-      })
-      setPeople(peopleArray);
-      setEmails(peopleEmails);
-    })
-  }, [])
 
   //filter the results by search
-  let filteredPeople = peopleArray.filter((person) => {
+  let filteredPeople = props.peopleArray.filter((person) => {
     return (person.fname.toLowerCase().indexOf(nameState.toLowerCase()) !== -1 || person.lname.toLowerCase().indexOf(nameState.toLowerCase())!== -1) || ((person.fname.toLowerCase()+ " " + person.lname.toLowerCase()).indexOf(nameState.toLowerCase()) !== -1);
   });
 
@@ -147,14 +126,13 @@ export function PeopleCard(props) {
 
   export function PeopleDetails(props){
     let fullname = useParams().fullname;
-    let person =  _.find(props.people, {fname:fullname});
-    console.log(person);
+    let person =  _.find(props.peopleArray, {fname:fullname});
     return(
       <div>
         <img className="people_image" src={"../"+person.image}  alt={"an image for " + person.fname + " "+ person.lname}/>
         <h2>{person.fname + " " + person.lname}</h2>
         <p><strong>Major: </strong>{person.major}</p>
-        <p><strong>Interests: </strong>{person.interests}</p>
+        <p><strong>Interests: </strong>{person.interest}</p>
         <p><strong>Class Standing: </strong>{person.year}</p>
         <p><strong>Email: </strong>{person.email}</p>
         <p><strong>Bio: </strong>{person.bio}</p>

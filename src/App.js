@@ -41,20 +41,6 @@ function App(props) {
       if(firebaseUser){
         setUser(firebaseUser)
         setIsLoading(false);
-        /*
-        let fnameUpdate = user.displayName.substr(0, user.displayName.indexOf(' '));
-        let lnameUpdate = user.displayName.substr(user.displayName.indexOf(' ')+1, user.displayName.length);
-        const newPerson = {
-          fname: fnameUpdate,
-          lname: lnameUpdate,
-          major: "-",
-          interest: "-",
-          year: "-",
-          email: user.email,
-          bio: "-"
-        }
-        firebase.database().ref('people').push(newPerson);
-        */
       }else{ //not defined, logged out
         setUser(null)
       }
@@ -73,6 +59,28 @@ function App(props) {
     ) 
   }*/
 
+  const [peopleArray, setPeople] = useState([]);
+  const [peopleEmails, setEmails] = useState([])
+
+  useEffect(() => {
+    const peopleRef = firebase.database().ref("people");
+    peopleRef.on("value", (snapshot) => {
+      const peopleObjects = snapshot.val();
+      let peopleKeyArray = Object.keys(peopleObjects);
+      let peopleArray = peopleKeyArray.map((key) => {
+        let singlePeopleObject = peopleObjects[key];
+        singlePeopleObject.key = key;
+        
+        return singlePeopleObject;
+      })
+      let peopleEmails = peopleArray.map((key) => {
+        return key.email;
+      })
+      setPeople(peopleArray);
+      setEmails(peopleEmails);
+    })
+  }, [])
+  console.log(peopleArray)
   
   let content = null;
 
@@ -95,7 +103,7 @@ function App(props) {
           <div className="container">
             <Switch>
               <Route exact path="/people" render={(routerProps) => (
-              <PeopleList {...routerProps} user={user} ></PeopleList>
+              <PeopleList {...routerProps} user={user} peopleArray={peopleArray} ></PeopleList>
               )} />
 
               <Route exact path="/" render={(routerProps) => (
@@ -111,11 +119,11 @@ function App(props) {
               )}/>
 
               <Route path="/people-edit" render={() => (
-              <EditProfile user={user} ></EditProfile>
+              <EditProfile user={user} peopleArray={peopleArray}></EditProfile>
               )}/>
 
               <Route path="/people/:fullname" render={(routerProps) => (
-              <PeopleDetails {...routerProps}></PeopleDetails>
+              <PeopleDetails {...routerProps} peopleArray={peopleArray}></PeopleDetails>
               )}/>
               
               <Redirect to="/" />

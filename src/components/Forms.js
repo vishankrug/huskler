@@ -130,32 +130,16 @@ export function EventsSubmissionForm(){
 }
 
 
-export function PeopleForm(){
+export function PeopleForm(props){
   let user = firebase.auth().currentUser;
   //let peopleRef = firebase.database.ref("people");
 
-  const [peopleArray, setPeople] = useState([]);
-
-  useEffect(() => {
-    const peopleRef = firebase.database().ref("people");
-    peopleRef.on("value", (snapshot) => {
-      const peopleObjects = snapshot.val();
-      let peopleKeyArray = Object.keys(peopleObjects);
-      let peopleArray = peopleKeyArray.map((key) => {
-        let singlePeopleObject = peopleObjects[key];
-        singlePeopleObject.key = key;
-        
-        return singlePeopleObject;
-      })
-      setPeople(peopleArray);
-    })
-  }, [])
-
   let keyOfCurrentUser;
+  console.log(props);
 
-  for(let i = 0; i < peopleArray.length; i++) {
-    if(peopleArray[i].email == user.email){
-      keyOfCurrentUser = peopleArray[i].key;
+  for(let i = 0; i < props.peopleArray.length; i++) {
+    if(props.peopleArray[i].email == user.email){
+      keyOfCurrentUser = props.peopleArray[i].key;
     }
   }
 

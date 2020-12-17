@@ -18,13 +18,14 @@ export function EventSubmission(){
 }
 
 export function EditProfile(props){
+  console.log(props.peopleArray);
   return(
     <main>
       <div className="d-flex justify-content-center mt-5">
         <h1>EDIT PROFILE</h1>
       </div>
 
-      <PeopleForm user={props.user} />
+      <PeopleForm user={props.user} peopleArray={props.peopleArray} />
       
      
   
