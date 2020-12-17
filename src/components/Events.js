@@ -1,11 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import _ from 'lodash';
-<<<<<<< HEAD
-import {Card, CardText, CardBody,CardLink, CardTitle, Col, Row} from 'reactstrap';
-=======
 import {Card, CardText, CardBody, CardFooter, CardLink, CardTitle, Col, Row} from 'reactstrap';
 import {Formik, Form, Field} from 'formik';
->>>>>>> e5503217237d350499cca056bfd745be433525aa
 import {Redirect, useParams} from 'react-router-dom';
 import { BackButton, SubmitEventButton } from './Buttons.js';
 import { Button } from 'reactstrap';
@@ -40,8 +36,9 @@ export function EventsList(props){
   }, [])
 
   
+  
 
-  console.log(interestedEventsFull);
+ // console.log(interestedEventsFull);
 
   ///// Handle interested /////
   const handleInterestedClick = (eventName) => {

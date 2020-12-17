@@ -37,25 +37,27 @@ function App(props) {
   const [isLoading, setIsLoading] = useState(true);
  
 
-<<<<<<< HEAD
-=======
-  
- 
-
-
-  
-  
-
->>>>>>> e5503217237d350499cca056bfd745be433525aa
-  //sa
   //auth state event listener
   useEffect( () => { //run after component loads
     //listen to the the authentication state
     const authUnregisterFunction = firebase.auth().onAuthStateChanged((firebaseUser) =>{
       if(firebaseUser){
-        console.log("logged in as: " + firebaseUser.displayName)
         setUser(firebaseUser)
         setIsLoading(false);
+        /*
+        let fnameUpdate = user.displayName.substr(0, user.displayName.indexOf(' '));
+        let lnameUpdate = user.displayName.substr(user.displayName.indexOf(' ')+1, user.displayName.length);
+        const newPerson = {
+          fname: fnameUpdate,
+          lname: lnameUpdate,
+          major: "-",
+          interest: "-",
+          year: "-",
+          email: user.email,
+          bio: "-"
+        }
+        firebase.database().ref('people').push(newPerson);
+        */
       }else{ //not defined, logged out
         setUser(null)
       }
