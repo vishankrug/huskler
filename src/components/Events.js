@@ -131,6 +131,7 @@ export function EventsList(){
         <SearchBarEvent updateEventNameSearch={updateEventNameSearch} eventNameState={eventNameState} updateHostedBySearch={updateHostedBySearch} hostedByState={hostedByState} clearEvents={clearEvents}></SearchBarEvent>
       </div>
       <SubmitEventButton />
+      <h3>Events</h3>
       <Row>
         {eventCards}
       </Row>
@@ -210,13 +211,13 @@ export function EventsIndividualPage(){
   let event = _.find(eventsArray, {title:eventName});
  
   if(!event){
-    return <h2>No event that matches</h2>
+    return <h4>No event that matches</h4>
   }
 
   return(
     <div>
       <img src={"../images/" + event.image} alt={"an image of " + event.title} className="event-images-lg mt-5" />
-      <h2>{event.title}</h2>
+      <h5>{event.title}</h5>
       <p><strong>Hosted by: </strong>{event.hostedBy}</p>
       <p><strong>Date: </strong>{event.date}</p>
       <p><strong>Time: </strong>{event.time}</p>
