@@ -44,12 +44,12 @@ function App(props) {
         setIsLoading(false);
         if(firebaseUser && firebaseUser.metadata.creationTime === firebaseUser.metadata.lastSignInTime) {
           const newPerson = {
-            fname: user.displayName.substr(0, user.displayName.indexOf(' ')),
-            lname: user.displayName.substr(user.displayName.indexOf(' ')+1, user.displayName.length),
+            fname: firebaseUser.displayName.substr(0, firebaseUser.displayName.indexOf(' ')),
+            lname: firebaseUser.displayName.substr(firebaseUser.displayName.indexOf(' ')+1, firebaseUser.displayName.length),
             major: "-",
             interest: "-",
             year: "-",
-            email: user.email,
+            email: firebaseUser.email,
             bio: "-",
             image: "images/avatar.png"
           }
@@ -76,7 +76,6 @@ function App(props) {
   const [eventsArray, setEvents] = useState([]); //array
   const [peopleArray, setPeople] = useState([]);
   //const [interestedEventsFull, setInterested] = useState(eventsArray);
-  const [peopleEmails, setEmails] = useState([])
   
 
   /////  Gets all data from firebase /////
@@ -86,7 +85,6 @@ function App(props) {
     peopleRef.on("value", (snapshot) => {
       const peopleObjects = snapshot.val();
       let peopleKeyArray = Object.keys(peopleObjects);
-      console.log()
       let peopleArray = peopleKeyArray.map((key) => {
         let singlePeopleObject = peopleObjects[key];
         singlePeopleObject.key = key;

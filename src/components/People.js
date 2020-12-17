@@ -65,6 +65,7 @@ export function PeopleList(props){
       <div className="search-bar">
         <SearchBarPage updateNameSearch={updateNameSearch} nameState={nameState} updateMajorSearch={updateMajorSearch} majorState={majorState} interestsState={interestsState} updateInterestsSearch={updateInterestsSearch} clearPeople={clearPeople} ></SearchBarPage>
       </div>
+      <h2>People</h2>
     <Row>
       {peopleCards}
     </Row>
@@ -110,7 +111,7 @@ export function PeopleCard(props) {
     return(
       <div>
         <img className="people_image" src={"../"+person.image}  alt={"an image for " + person.fname + " "+ person.lname}/>
-        <h2>{person.fname + " " + person.lname}</h2>
+        <h3>{person.fname + " " + person.lname}</h3>
         <p><strong>Major: </strong>{person.major}</p>
         <p><strong>Interests: </strong>{person.interest}</p>
         <p><strong>Class Standing: </strong>{person.year}</p>
