@@ -4,4 +4,5 @@
 
 User addition to the firebase database is buggy.
 
-The site can be viewed at <https://firebase-project-id.firebaseapp.com//>
+The site can be viewed at <https://huskler.firebaseapp.com//>
+// Firebase has been deactivated so backend services are unavailable.
